@@ -24,6 +24,8 @@ export default function Trainer(props) {
       spa: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
       spd: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
       spe: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
+      moves: [{}],
+      selectedMoves: [0, 0, 0, 0],
     };
 
     const url =
@@ -49,8 +51,11 @@ export default function Trainer(props) {
             info: ability.ability.url.split("/")[6],
           };
         });
-        newPokemon.moves = pokeData.moves.map((move) => {
-          return move.move.name;
+        newPokemon.moves = pokeData.moves.map((move, index) => {
+          return {
+            label: move.move.name,
+            value: index + 1,
+          };
         });
         if (add) setTeam([...team, newPokemon]);
         else
@@ -206,6 +211,22 @@ export default function Trainer(props) {
       );
   };
 
+  const selectMove = (newMoveIndex, move) => {
+    setTeam(
+      team.map((pokemon, index) =>
+        index === selectedIndex
+          ? {
+              ...pokemon,
+              selectedMoves: pokemon.selectedMoves.map(
+                (currentMove, moveIndex) =>
+                  moveIndex === newMoveIndex ? move : currentMove
+              ),
+            }
+          : pokemon
+      )
+    );
+  };
+
   console.log(team);
 
   return (
@@ -233,6 +254,7 @@ export default function Trainer(props) {
             selectAbility={(ability) => selectAbility(ability)}
             selectStatus={(nature) => selectStatus(nature)}
             changeStat={(value, stat, type) => changeStat(value, stat, type)}
+            selectMove={(index, id) => selectMove(index, id)}
           />
         ) : (
           <></>

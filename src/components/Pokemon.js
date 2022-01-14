@@ -1,6 +1,7 @@
 import Selector from "./Selector";
 import NumberEntry from "./NumberEntry";
 import StatEdit from "./StatEdit";
+import Moves from "./Moves";
 import pkmnData from "../data/PokemonData";
 import natures from "../data/Natures";
 import statuses from "../data/Statuses";
@@ -136,6 +137,10 @@ export default function Pokemon(props) {
           changeStat={(value, stat, type) =>
             props.changeStat(value, stat, type)
           }
+        />
+        <Moves
+          pokemon={selectedPokemon}
+          selectMove={(index, id) => props.selectMove(index, id)}
         />
       </div>
     </div>
