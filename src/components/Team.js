@@ -7,7 +7,7 @@ export default function Team(props) {
         return (
           <div
             className={
-              "w-16 h-16 rounded-2xl p-1 flex justify-center items-center " +
+              "w-16 h-16 rounded-2xl p-1 flex justify-center items-center duration-200 ease-out " +
               (props.index === index
                 ? "bg-button-selected shadow-inner "
                 : "bg-white hover:bg-button-hover shadow-md cursor-pointer duration-200")
