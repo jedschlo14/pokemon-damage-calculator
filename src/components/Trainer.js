@@ -127,19 +127,83 @@ export default function Trainer(props) {
   };
 
   const changeStat = (value, stat, type) => {
-    setTeam(
-      team.map((pokemon, index) =>
-        index === selectedIndex
-          ? {
-              ...pokemon,
-              [stat]: {
-                ...pokemon[stat],
-                [type]: value,
-              },
-            }
-          : pokemon
-      )
-    );
+    if (type === "stage")
+      setTeam(
+        team.map((pokemon, index) =>
+          index === selectedIndex
+            ? {
+                ...pokemon,
+                [stat]: {
+                  ...pokemon[stat],
+                  stage: value,
+                },
+              }
+            : pokemon
+        )
+      );
+    else if (type !== "final" && team[selectedIndex][stat].final === -1)
+      setTeam(
+        team.map((pokemon, index) =>
+          index === selectedIndex
+            ? {
+                ...pokemon,
+                [stat]: {
+                  ...pokemon[stat],
+                  [type]: value,
+                },
+              }
+            : pokemon
+        )
+      );
+    else if (type === "final")
+      setTeam(
+        team.map((pokemon, index) =>
+          index === selectedIndex
+            ? {
+                ...pokemon,
+                [stat]: {
+                  ...pokemon[stat],
+                  final: value,
+                  ev: -1,
+                  iv: -1,
+                  stage: 7,
+                },
+              }
+            : pokemon
+        )
+      );
+    else if (type === "iv")
+      setTeam(
+        team.map((pokemon, index) =>
+          index === selectedIndex
+            ? {
+                ...pokemon,
+                [stat]: {
+                  ...pokemon[stat],
+                  iv: value,
+                  ev: 0,
+                  final: -1,
+                },
+              }
+            : pokemon
+        )
+      );
+    else if (type === "ev")
+      setTeam(
+        team.map((pokemon, index) =>
+          index === selectedIndex
+            ? {
+                ...pokemon,
+                [stat]: {
+                  ...pokemon[stat],
+                  iv: 0,
+                  ev: value,
+                  final: -1,
+                },
+              }
+            : pokemon
+        )
+      );
   };
 
   console.log(team);

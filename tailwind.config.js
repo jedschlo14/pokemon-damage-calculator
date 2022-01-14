@@ -7,6 +7,7 @@ module.exports = {
       light: "#7dd3fc",
       dark: "#0c4a6e",
       white: "#ffffff",
+      special: "#0284c7",
       title: "#0284c7",
       button: {
         selected: "#0ea5e9",

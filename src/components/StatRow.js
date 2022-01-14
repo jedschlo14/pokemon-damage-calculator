@@ -4,6 +4,11 @@ import stages from "../data/Stages";
 import natures from "../data/Natures";
 
 export default function Stats(props) {
+  const other = (stat) => {
+    if (props.pokemon[props.statValue][stat] === -1) return "";
+    return props.pokemon[props.statValue][stat];
+  };
+
   const final = () => {
     const version = props.version < 2 ? "old" : "new";
     if (props.pokemon[props.statValue].final !== -1)
@@ -47,13 +52,13 @@ export default function Stats(props) {
       {props.version < 2 ? (
         <>
           <NumberEntry
-            value={props.pokemon[props.statValue].iv}
+            value={other("iv")}
             min={0}
             max={31}
             onChange={(e) => props.changeStat(e, props.statValue, "iv")}
           />
           <NumberEntry
-            value={props.pokemon[props.statValue].ev}
+            value={other("ev")}
             min={0}
             max={65535}
             onChange={(e) => props.changeStat(e, props.statValue, "ev")}
@@ -62,13 +67,13 @@ export default function Stats(props) {
       ) : (
         <>
           <NumberEntry
-            value={props.pokemon[props.statValue].iv}
+            value={other("iv")}
             min={0}
             max={31}
             onChange={(e) => props.changeStat(e, props.statValue, "iv")}
           />
           <NumberEntry
-            value={props.pokemon[props.statValue].ev}
+            value={other("ev")}
             min={0}
             max={255}
             onChange={(e) => props.changeStat(e, props.statValue, "ev")}
@@ -78,7 +83,9 @@ export default function Stats(props) {
       <NumberEntry
         value={final()}
         min={0}
-        max={1000}
+        max={2499}
+        color={props.pokemon[props.statValue].stage === 7 ? false : true}
+        large={final() > 999 ? true : false}
         onChange={(id) => props.changeStat(id, props.statValue, "final")}
       />
       {props.statValue === "hp" ? (

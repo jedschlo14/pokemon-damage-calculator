@@ -1,5 +1,6 @@
 export default function NumberEntry(props) {
   const onChange = (value) => {
+    if (value === "") value = props.min;
     if (value < props.min) value = props.min;
     if (value > props.max) value = props.max;
     value = parseInt(value);
@@ -7,10 +8,17 @@ export default function NumberEntry(props) {
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div
+      className={
+        "flex justify-center items-center " +
+        (props.large ? "text-xs " : "") +
+        (props.color ? "text-special" : "")
+      }
+    >
       <input
         className="w-16 h-4 bg-white rounded-xl shadow-inner text-center font-semibold p-4"
         value={props.value}
+        placeholder="-"
         onChange={(e) => onChange(e.target.value.replace(/\D/g, ""))}
       ></input>
     </div>
