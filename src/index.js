@@ -1,14 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import "./assets/styles/tailwind.css";
+import { render } from "react-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Landing from "./pages/Landing";
+import About from "./pages/About";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+const rootElement = document.getElementById("root");
+render(
+  <BrowserRouter>
+    <Routes>
+      <Route path="/:version" element={<Landing />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/" element={<Navigate to="/3" />} />
+      <Route path="*" element={<div>404</div>} />
+    </Routes>
+  </BrowserRouter>,
+  rootElement
 );
 
 // If you want to start measuring performance in your app, pass a function
