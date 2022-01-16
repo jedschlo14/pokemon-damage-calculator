@@ -5,6 +5,7 @@ import Moves from "./Moves";
 import pkmnData from "../data/PokemonData";
 import natures from "../data/Natures";
 import statuses from "../data/Statuses";
+import itemData from "../data/Items";
 
 export default function Pokemon(props) {
   const selectedPokemon = props.team[props.index];
@@ -37,7 +38,7 @@ export default function Pokemon(props) {
           <Selector
             id={selectedPokemon.nature}
             data={natures}
-            onChange={(id) => props.selectNature(id)}
+            onChange={(id) => props.changeAttribute("nature", id)}
           />
         </div>
         <div className="col-span-2 flex gap-2 justify-center items-center font-extrabold">
@@ -46,7 +47,7 @@ export default function Pokemon(props) {
             value={selectedPokemon.level}
             min={1}
             max={100}
-            onChange={(e) => props.changeLevel(e)}
+            onChange={(value) => props.changeAttribute("level", value)}
           />
         </div>
         <div className="row-start-3 flex justify-center items-center font-extrabold">
@@ -56,7 +57,7 @@ export default function Pokemon(props) {
           <Selector
             id={selectedPokemon.ability}
             data={selectedPokemon.abilities}
-            onChange={(id) => props.selectAbility(id)}
+            onChange={(id) => props.changeAttribute("ability", id)}
           />
         </div>
         {selectedPokemon.hasOwnProperty("types") ? (
@@ -107,15 +108,16 @@ export default function Pokemon(props) {
           <></>
         )}
         <div className="row-start-4 flex justify-center items-center font-extrabold">
-          Status:
+          Item:
         </div>
-        <div className="col-span-3">
+        <div className="col-span-3 capitalize">
           <Selector
-            id={selectedPokemon.status}
-            data={statuses}
-            onChange={(id) => props.selectStatus(id)}
+            id={selectedPokemon.item}
+            data={itemData}
+            onChange={(id) => props.changeAttribute("item", id)}
           />
         </div>
+
         {selectedPokemon.hasOwnProperty("types") &&
         selectedPokemon.types.length === 2 ? (
           <div className="col-span-2 flex justify-center items-center">
@@ -131,6 +133,18 @@ export default function Pokemon(props) {
         ) : (
           <div className="col-span-2"></div>
         )}
+        <div className="row-start-5 flex justify-center items-center font-extrabold">
+          Status:
+        </div>
+        <div className="col-span-3">
+          <Selector
+            id={selectedPokemon.status}
+            data={statuses}
+            onChange={(id) => props.changeAttribute("status", id)}
+          />
+        </div>
+        <div></div>
+        <div></div>
         <StatEdit
           pokemon={selectedPokemon}
           version={props.version}

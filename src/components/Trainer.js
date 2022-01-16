@@ -17,6 +17,7 @@ export default function Trainer(props) {
       nature: 2,
       abilities: [],
       ability: 1,
+      item: 0,
       status: 1,
       hp: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
       atk: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
@@ -53,7 +54,7 @@ export default function Trainer(props) {
         });
         newPokemon.moves = pokeData.moves.map((move, index) => {
           return {
-            label: move.move.name,
+            label: move.move.name.split("-").join(" "),
             value: index + 1,
           };
         });
@@ -89,126 +90,49 @@ export default function Trainer(props) {
     if (selectedIndex === maxIndex) setSelectedIndex(maxIndex - 1);
   };
 
-  const changeLevel = (level) => {
+  const changeAttribute = (attribute, value) => {
     setTeam(
       team.map((pokemon, index) =>
         index === selectedIndex
           ? {
               ...pokemon,
-              level: level,
+              [attribute]: value,
             }
           : pokemon
-      )
-    );
-  };
-
-  const selectNature = (nature) => {
-    setTeam(
-      team.map((pokemon, index) =>
-        index === selectedIndex
-          ? {
-              ...pokemon,
-              nature: nature,
-            }
-          : pokemon
-      )
-    );
-  };
-
-  const selectAbility = (ability) => {
-    setTeam(
-      team.map((pokemon, index) =>
-        index === selectedIndex ? { ...pokemon, ability: ability } : pokemon
-      )
-    );
-  };
-
-  const selectStatus = (status) => {
-    setTeam(
-      team.map((pokemon, index) =>
-        index === selectedIndex ? { ...pokemon, status: status } : pokemon
       )
     );
   };
 
   const changeStat = (value, stat, type) => {
-    if (type === "stage")
-      setTeam(
-        team.map((pokemon, index) =>
-          index === selectedIndex
-            ? {
-                ...pokemon,
-                [stat]: {
-                  ...pokemon[stat],
-                  stage: value,
-                },
-              }
-            : pokemon
-        )
-      );
+    var statObj = { ...team[selectedIndex][stat] };
+    if (type === "stage") statObj.stage = value;
     else if (type !== "final" && team[selectedIndex][stat].final === -1)
-      setTeam(
-        team.map((pokemon, index) =>
-          index === selectedIndex
-            ? {
-                ...pokemon,
-                [stat]: {
-                  ...pokemon[stat],
-                  [type]: value,
-                },
-              }
-            : pokemon
-        )
-      );
-    else if (type === "final")
-      setTeam(
-        team.map((pokemon, index) =>
-          index === selectedIndex
-            ? {
-                ...pokemon,
-                [stat]: {
-                  ...pokemon[stat],
-                  final: value,
-                  ev: -1,
-                  iv: -1,
-                  stage: 7,
-                },
-              }
-            : pokemon
-        )
-      );
-    else if (type === "iv")
-      setTeam(
-        team.map((pokemon, index) =>
-          index === selectedIndex
-            ? {
-                ...pokemon,
-                [stat]: {
-                  ...pokemon[stat],
-                  iv: value,
-                  ev: 0,
-                  final: -1,
-                },
-              }
-            : pokemon
-        )
-      );
-    else if (type === "ev")
-      setTeam(
-        team.map((pokemon, index) =>
-          index === selectedIndex
-            ? {
-                ...pokemon,
-                [stat]: {
-                  ...pokemon[stat],
-                  iv: 0,
-                  ev: value,
-                  final: -1,
-                },
-              }
-            : pokemon
-        )
-      );
+      statObj[type] = value;
+    else if (type === "final") {
+      statObj.final = value;
+      statObj.iv = -1;
+      statObj.ev = -1;
+      statObj.stage = 7;
+    } else if (type === "iv") {
+      statObj.iv = value;
+      statObj.ev = 0;
+      statObj.final = -1;
+    } else if (type === "ev") {
+      statObj.iv = 0;
+      statObj.ev = value;
+      statObj.final = -1;
+    }
+
+    setTeam(
+      team.map((pokemon, index) =>
+        index === selectedIndex
+          ? {
+              ...pokemon,
+              [stat]: statObj,
+            }
+          : pokemon
+      )
+    );
   };
 
   const selectMove = (newMoveIndex, move) => {
@@ -244,15 +168,14 @@ export default function Trainer(props) {
         />
         {team.length > 0 ? (
           <Pokemon
-            index={selectedIndex}
             team={team}
+            index={selectedIndex}
             version={props.version}
             selectPokemon={(id) => updateTeam(id)}
             removePokemon={removePokemon}
-            changeLevel={(level) => changeLevel(level)}
-            selectNature={(nature) => selectNature(nature)}
-            selectAbility={(ability) => selectAbility(ability)}
-            selectStatus={(nature) => selectStatus(nature)}
+            changeAttribute={(attribute, value) =>
+              changeAttribute(attribute, value)
+            }
             changeStat={(value, stat, type) => changeStat(value, stat, type)}
             selectMove={(index, id) => selectMove(index, id)}
           />
@@ -260,6 +183,11 @@ export default function Trainer(props) {
           <></>
         )}
       </div>
+      <div>Stats Object</div>
+      <div>"-" to " " for item/moves/etc</div>
+      {/* <div>Forms</div>
+      <div>Gender</div>
+      <div>Current HP</div> */}
     </div>
   );
 }
