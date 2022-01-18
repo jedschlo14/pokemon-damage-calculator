@@ -14,6 +14,7 @@
     "react-select": "^5.2.1",
     "roman-numerals-api": "^1.0.6",
     "roman-numerals-convert": "^1.0.5",
+    "tailwindcss-percentage-width": "^1.0.1",
     "web-vitals": "^2.1.2"
   },
   "scripts": {

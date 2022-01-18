@@ -1,7 +1,9 @@
 import Selector from "./Selector";
 import NumberEntry from "./NumberEntry";
+import Types from "./Types";
 import StatEdit from "./StatEdit";
 import Moves from "./Moves";
+import Health from "./Health";
 import pkmnData from "../data/PokemonData";
 import natures from "../data/Natures";
 import statuses from "../data/Statuses";
@@ -61,49 +63,7 @@ export default function Pokemon(props) {
           />
         </div>
         {selectedPokemon.hasOwnProperty("types") ? (
-          <div className="col-span-2 flex justify-center items-center">
-            <div
-              className={
-                "h-7 w-20 rounded-lg flex justify-center items-center capitalize text-sm text-white shadow-md cursor-default " +
-                (selectedPokemon.types[0] === "normal"
-                  ? "bg-type-normal"
-                  : "") +
-                (selectedPokemon.types[0] === "fire" ? "bg-type-fire" : "") +
-                (selectedPokemon.types[0] === "water" ? "bg-type-water" : "") +
-                (selectedPokemon.types[0] === "electric"
-                  ? "bg-type-electric"
-                  : "") +
-                (selectedPokemon.types[0] === "grass" ? "bg-type-grass" : "") +
-                (selectedPokemon.types[0] === "ice" ? "bg-type-ice" : "") +
-                (selectedPokemon.types[0] === "fighting"
-                  ? "bg-type-fighting"
-                  : "") +
-                (selectedPokemon.types[0] === "poison"
-                  ? "bg-type-poison"
-                  : "") +
-                (selectedPokemon.types[0] === "ground"
-                  ? "bg-type-ground"
-                  : "") +
-                (selectedPokemon.types[0] === "flying"
-                  ? "bg-type-flying"
-                  : "") +
-                (selectedPokemon.types[0] === "psychic"
-                  ? "bg-type-psychic"
-                  : "") +
-                (selectedPokemon.types[0] === "bug" ? "bg-type-bug" : "") +
-                (selectedPokemon.types[0] === "rock" ? "bg-type-rock" : "") +
-                (selectedPokemon.types[0] === "ghost" ? "bg-type-ghost" : "") +
-                (selectedPokemon.types[0] === "dragon"
-                  ? "bg-type-dragon"
-                  : "") +
-                (selectedPokemon.types[0] === "dark" ? "bg-type-dark" : "") +
-                (selectedPokemon.types[0] === "steel" ? "bg-type-steel" : "") +
-                (selectedPokemon.types[0] === "fairy" ? "bg-type-fairy" : "")
-              }
-            >
-              {selectedPokemon.types[0]}
-            </div>
-          </div>
+          <Types pokemon={selectedPokemon} />
         ) : (
           <></>
         )}
@@ -117,22 +77,6 @@ export default function Pokemon(props) {
             onChange={(id) => props.changeAttribute("item", id)}
           />
         </div>
-
-        {selectedPokemon.hasOwnProperty("types") &&
-        selectedPokemon.types.length === 2 ? (
-          <div className="col-span-2 flex justify-center items-center">
-            <div
-              className={
-                "h-7 w-20 rounded-lg flex justify-center items-center capitalize text-sm text-white shadow-md cursor-default bg-type-" +
-                selectedPokemon.types[1]
-              }
-            >
-              {selectedPokemon.types[1]}
-            </div>
-          </div>
-        ) : (
-          <div className="col-span-2"></div>
-        )}
         <div className="row-start-5 flex justify-center items-center font-extrabold">
           Status:
         </div>
@@ -143,8 +87,7 @@ export default function Pokemon(props) {
             onChange={(id) => props.changeAttribute("status", id)}
           />
         </div>
-        <div></div>
-        <div></div>
+
         <StatEdit
           pokemon={selectedPokemon}
           version={props.version}
@@ -155,6 +98,12 @@ export default function Pokemon(props) {
         <Moves
           pokemon={selectedPokemon}
           selectMove={(index, id) => props.selectMove(index, id)}
+        />
+        <Health
+          pokemon={selectedPokemon}
+          changeStat={(value, stat, type) =>
+            props.changeStat(value, stat, type)
+          }
         />
       </div>
     </div>

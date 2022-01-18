@@ -19,12 +19,22 @@ export default function Trainer(props) {
       ability: 1,
       item: 0,
       status: 1,
-      hp: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
-      atk: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
-      def: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
-      spa: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
-      spd: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
-      spe: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
+      stats: {
+        hp: {
+          base: 0,
+          iv: 0,
+          ev: 0,
+          final: -1,
+          stage: 7,
+          current: -1,
+          currentPct: 100,
+        },
+        atk: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
+        def: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
+        spa: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
+        spd: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
+        spe: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
+      },
       moves: [{}],
       selectedMoves: [0, 0, 0, 0],
     };
@@ -38,12 +48,12 @@ export default function Trainer(props) {
         newPokemon.level = 50;
         newPokemon.sprite = pokeData.sprites.front_default;
         newPokemon.types = pokeData.types.map((type) => type.type.name);
-        newPokemon.hp.base = pokeData.stats[0].base_stat;
-        newPokemon.atk.base = pokeData.stats[1].base_stat;
-        newPokemon.def.base = pokeData.stats[2].base_stat;
-        newPokemon.spa.base = pokeData.stats[3].base_stat;
-        newPokemon.spd.base = pokeData.stats[4].base_stat;
-        newPokemon.spe.base = pokeData.stats[5].base_stat;
+        newPokemon.stats.hp.base = pokeData.stats[0].base_stat;
+        newPokemon.stats.atk.base = pokeData.stats[1].base_stat;
+        newPokemon.stats.def.base = pokeData.stats[2].base_stat;
+        newPokemon.stats.spa.base = pokeData.stats[3].base_stat;
+        newPokemon.stats.spd.base = pokeData.stats[4].base_stat;
+        newPokemon.stats.spe.base = pokeData.stats[5].base_stat;
         newPokemon.weight = pokeData.weight;
         newPokemon.abilities = pokeData.abilities.map((ability, index) => {
           return {
@@ -104,9 +114,9 @@ export default function Trainer(props) {
   };
 
   const changeStat = (value, stat, type) => {
-    var statObj = { ...team[selectedIndex][stat] };
+    var statObj = { ...team[selectedIndex].stats[stat] };
     if (type === "stage") statObj.stage = value;
-    else if (type !== "final" && team[selectedIndex][stat].final === -1)
+    else if (type !== "final" && team[selectedIndex].stats[stat].final === -1)
       statObj[type] = value;
     else if (type === "final") {
       statObj.final = value;
@@ -117,10 +127,53 @@ export default function Trainer(props) {
       statObj.iv = value;
       statObj.ev = 0;
       statObj.final = -1;
+      if (stat === "hp") statObj.current = -1;
     } else if (type === "ev") {
       statObj.iv = 0;
       statObj.ev = value;
       statObj.final = -1;
+      if (stat === "hp") statObj.current = -1;
+    }
+    if (type === "current") {
+      statObj.current = value;
+      if (statObj.final === -1) {
+        const final =
+          team[selectedIndex].stats.hp.final === -1
+            ? Math.floor(
+                ((2 * team[selectedIndex].stats.hp.base +
+                  team[selectedIndex].stats.hp.iv +
+                  Math.floor(team[selectedIndex].stats.hp.ev / 4)) *
+                  team[selectedIndex].level) /
+                  100
+              ) +
+              team[selectedIndex].level +
+              10
+            : team[selectedIndex].stats.hp.final;
+        statObj.currentPct = Math.floor((statObj.current / final) * 100);
+      } else
+        statObj.currentPct = Math.floor(
+          (statObj.current / statObj.final) * 100
+        );
+    } else if (type === "currentPct") {
+      statObj.currentPct = value;
+      if (statObj.final === -1) {
+        const final =
+          team[selectedIndex].stats.hp.final === -1
+            ? Math.floor(
+                ((2 * team[selectedIndex].stats.hp.base +
+                  team[selectedIndex].stats.hp.iv +
+                  Math.floor(team[selectedIndex].stats.hp.ev / 4)) *
+                  team[selectedIndex].level) /
+                  100
+              ) +
+              team[selectedIndex].level +
+              10
+            : team[selectedIndex].stats.hp.final;
+        statObj.current = Math.floor((value * final) / 100);
+      } else statObj.current = Math.floor((value * statObj.final) / 100);
+    } else if (stat === "hp") {
+      statObj.current = statObj.final;
+      statObj.currentPct = 100;
     }
 
     setTeam(
@@ -128,7 +181,7 @@ export default function Trainer(props) {
         index === selectedIndex
           ? {
               ...pokemon,
-              [stat]: statObj,
+              stats: { ...pokemon.stats, [stat]: statObj },
             }
           : pokemon
       )
@@ -183,11 +236,10 @@ export default function Trainer(props) {
           <></>
         )}
       </div>
-      <div>Stats Object</div>
-      <div>"-" to " " for item/moves/etc</div>
       {/* <div>Forms</div>
       <div>Gender</div>
-      <div>Current HP</div> */}
+      <div>Current HP</div>
+      <div>Move final() to Pokemon.js</div> */}
     </div>
   );
 }

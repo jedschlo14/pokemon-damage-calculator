@@ -11,12 +11,12 @@ export default function NumberEntry(props) {
     <div
       className={
         "flex justify-center items-center " +
-        (props.large ? "text-xs " : "") +
+        (props.value > 999 ? "text-xs " : "") +
         (props.color ? "text-special" : "")
       }
     >
       <input
-        className="w-16 h-4 bg-white rounded-xl shadow-inner text-center font-semibold p-4"
+        className="w-14 h-1 p-3 bg-white rounded-xl shadow-inner text-center font-semibold"
         value={props.value}
         placeholder="-"
         onChange={(e) => onChange(e.target.value.replace(/\D/g, ""))}
