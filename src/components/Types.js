@@ -1,21 +1,21 @@
 export default function Types(props) {
-  return (
-    <div className="flex flex-col justify-center items-center gap-4 col-span-2 row-span-3">
-      {props.pokemon.types.map((type, index) => {
-        return (
-          <div
-            className={
-              "p-2 h-10 w-24 rounded-lg flex justify-center items-center capitalize text-white shadow-md cursor-default bg-type" +
-              type
-            }
-            key={index}
-          >
-            {type}
-          </div>
-        );
-      })}
-    </div>
-  );
+    return (
+        <div className="flex flex-col justify-center items-center gap-4 col-span-2 row-span-3">
+            {props.pokemon.types.map((type, index) => {
+                return (
+                    <div
+                        className={
+                            "p-2 h-10 w-24 rounded-lg flex justify-center items-center capitalize text-white shadow-md cursor-default bg-type-" +
+                            type
+                        }
+                        key={index}
+                    >
+                        {type}
+                    </div>
+                );
+            })}
+        </div>
+    );
 }
 
 // (type === "normal" ? "bg-type-normal" : "") +

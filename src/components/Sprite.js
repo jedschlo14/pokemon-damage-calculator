@@ -1,20 +1,39 @@
 // import "../assets/styles/tailwind.css";
 import React, { useState } from "react";
+// import React, { useRef } from "react";
 
 export default function Sprite(props) {
-  const [sprite, setSprite] = useState();
-  const [name, setName] = useState();
+    const [sprite, setSprite] = useState();
+    const [name, setName] = useState();
 
-  const url = "https://pokeapi.co/api/v2/pokemon/" + props.id.toString() + "/";
-  fetch(url)
-    .then((response) => response.json())
-    .then(function (pokeData) {
-      setSprite(pokeData.sprites.other["official-artwork"].front_default);
-      setName(pokeData.name);
-    });
+    const url =
+        "https://pokeapi.co/api/v2/pokemon/" + props.id.toString() + "/";
+    fetch(url)
+        .then((response) => response.json())
+        .then(function (pokeData) {
+            setSprite(pokeData.sprites.other["official-artwork"].front_default);
+            setName(pokeData.name);
+        });
 
-  return <img className="w-full h-full object-fit" src={sprite} alt={name} />;
+    return <img className="w-full h-full object-fit" src={sprite} alt={name} />;
 }
+
+// export default function Sprite(props) {
+//     const sprite = useRef();
+//     const name = useRef();
+
+//     const url =
+//         "https://pokeapi.co/api/v2/pokemon/" + props.id.toString() + "/";
+//     fetch(url)
+//         .then((response) => response.json())
+//         .then(function (pokeData) {
+//             sprite.current.src =
+//                 pokeData.sprites.other["official-artwork"].front_default;
+//             name.current.src = pokeData.name;
+//         });
+
+//     return <img className="w-full h-full object-fit" alt={name} ref={sprite} />;
+// }
 
 // export default class Sprite extends Component {
 //   constructor(props) {

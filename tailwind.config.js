@@ -1,5 +1,4 @@
 const percentageWidth = require("tailwindcss-percentage-width");
-
 // import { colors } from "tailwindcss/defaultTheme";
 
 module.exports = {
