@@ -1,4 +1,4 @@
-import { Selector } from "./Selector";
+import { Selector } from "components";
 
 export const Moves = ({ pokemon, selectMove }) => {
     return (
