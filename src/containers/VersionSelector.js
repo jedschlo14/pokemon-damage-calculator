@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const versions = ["RBY", "GSC", "ADV", "DPP", "BW", "XY", "SM", "SS"];
 
-export default function VersionSelector(props) {
+export const VersionSelector = ({ version, onChange }) => {
     return (
         <div>
             <div className="w-full bg-light shadow-md rounded-2xl">
@@ -17,12 +17,12 @@ export default function VersionSelector(props) {
                             <Link
                                 className={
                                     "w-16 h-8 rounded-lg flex justify-center items-center " +
-                                    (props.version === index
+                                    (version === index
                                         ? "bg-button-selected shadow-inner cursor-default"
                                         : "hover:bg-button-hover bg-white shadow-md cursor-pointer duration-200")
                                 }
                                 key={index}
-                                onClick={() => props.onChange(index)}
+                                onClick={() => onChange(index)}
                                 to={`/${index + 1}`}
                             >
                                 {name}
@@ -33,4 +33,4 @@ export default function VersionSelector(props) {
             </div>
         </div>
     );
-}
+};

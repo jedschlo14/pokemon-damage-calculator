@@ -1,21 +1,19 @@
-export default function ProgressBar(props) {
+export const ProgressBar = ({ pokemon }) => {
     const final =
-        props.pokemon.stats.hp.final === -1
+        pokemon.stats.hp.final === -1
             ? Math.floor(
-                  ((2 * props.pokemon.stats.hp.base +
-                      props.pokemon.stats.hp.iv +
-                      Math.floor(props.pokemon.stats.hp.ev / 4)) *
-                      props.pokemon.level) /
+                  ((2 * pokemon.stats.hp.base +
+                      pokemon.stats.hp.iv +
+                      Math.floor(pokemon.stats.hp.ev / 4)) *
+                      pokemon.level) /
                       100
               ) +
-              props.pokemon.level +
+              pokemon.level +
               10
-            : props.pokemon.stats.hp.final;
+            : pokemon.stats.hp.final;
 
     const current =
-        props.pokemon.stats.hp.current === -1
-            ? final
-            : props.pokemon.stats.hp.current;
+        pokemon.stats.hp.current === -1 ? final : pokemon.stats.hp.current;
     const pct = Math.floor((current / final) * 100);
 
     return (
@@ -27,4 +25,4 @@ export default function ProgressBar(props) {
             ></div>
         </div>
     );
-}
+};

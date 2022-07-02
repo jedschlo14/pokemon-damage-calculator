@@ -1,4 +1,4 @@
-const natures = [
+export const natures = [
     { label: "Adamant (+Atk, -SpA)", value: 1, info: ["atk", "spa"] },
     { label: "Bashful", value: 2, info: ["spa", "spa"] },
     { label: "Brave (+Atk, -Spe)", value: 3, info: ["atk", "spe"] },
@@ -25,5 +25,3 @@ const natures = [
     { label: "Serious", value: 24, info: ["spe", "spe"] },
     { label: "Timid (+Spe, -Atk)", value: 25, info: ["spe", "atk"] },
 ];
-
-export default natures;

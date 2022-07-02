@@ -37,7 +37,7 @@ const styles = {
     }),
 };
 
-function customTheme(theme) {
+const customTheme = (theme) => {
     return {
         ...theme,
         colors: {
@@ -46,22 +46,22 @@ function customTheme(theme) {
             primary: "#0284c7",
         },
     };
-}
+};
 
-export default function Selector(props) {
+export const Selector = ({ id, data, onChange, centered }) => {
     return (
-        <div className={props.centered ? "text-center text-sm" : ""}>
+        <div className={centered ? "text-center text-sm" : ""}>
             <Select
                 components={{
                     IndicatorSeparator: () => null,
                 }}
-                options={props.data}
+                options={data}
                 styles={styles}
                 theme={customTheme}
                 menuPlacement="auto"
-                value={props.data[props.id - 1]}
-                onChange={(e) => props.onChange(e.value)}
+                value={data[id - 1]}
+                onChange={(e) => onChange(e.value)}
             />
         </div>
     );
-}
+};

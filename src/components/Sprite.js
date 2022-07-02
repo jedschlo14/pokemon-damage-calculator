@@ -2,12 +2,11 @@
 import React, { useState } from "react";
 // import React, { useRef } from "react";
 
-export default function Sprite(props) {
+export const Sprite = ({ id }) => {
     const [sprite, setSprite] = useState();
     const [name, setName] = useState();
 
-    const url =
-        "https://pokeapi.co/api/v2/pokemon/" + props.id.toString() + "/";
+    const url = "https://pokeapi.co/api/v2/pokemon/" + id.toString() + "/";
     fetch(url)
         .then((response) => response.json())
         .then(function (pokeData) {
@@ -16,7 +15,7 @@ export default function Sprite(props) {
         });
 
     return <img className="w-full h-full object-fit" src={sprite} alt={name} />;
-}
+};
 
 // export default function Sprite(props) {
 //     const sprite = useRef();

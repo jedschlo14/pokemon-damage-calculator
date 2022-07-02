@@ -1,4 +1,4 @@
-const stats = [
+export const stats = [
     { label: "HP", value: "hp" },
     { label: "Attack", value: "atk" },
     { label: "Defense", value: "def" },
@@ -6,5 +6,3 @@ const stats = [
     { label: "Sp. Def", value: "spd" },
     { label: "Speed", value: "spe" },
 ];
-
-export default stats;

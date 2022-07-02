@@ -1,26 +1,26 @@
-export default function NumberEntry(props) {
-    const onChange = (value) => {
-        if (value === "") value = props.min;
-        if (value < props.min) value = props.min;
-        if (value > props.max) value = props.max;
-        value = parseInt(value);
-        props.onChange(value);
+export const NumberEntry = ({ value, min, max, onChange, color }) => {
+    const handleChange = (newValue) => {
+        if (newValue === "" || newValue < min) onChange(min);
+        else if (newValue > max) newValue = onChange(max);
+        else onChange(parseInt(newValue));
     };
 
     return (
         <div
             className={
                 "flex justify-center items-center " +
-                (props.value > 999 ? "text-xs " : "") +
-                (props.color ? "text-special" : "")
+                (value > 999 ? "text-xs " : "") +
+                (color ? "text-special" : "")
             }
         >
             <input
                 className="w-14 h-1 p-3 bg-white rounded-xl shadow-inner text-center font-semibold"
-                value={props.value}
+                value={value}
                 placeholder="-"
-                onChange={(e) => onChange(e.target.value.replace(/\D/g, ""))}
+                onChange={(e) =>
+                    handleChange(e.target.value.replace(/\D/g, ""))
+                }
             ></input>
         </div>
     );
-}
+};

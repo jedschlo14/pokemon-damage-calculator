@@ -1,19 +1,19 @@
-import AddPokemon from "./AddPokemon";
+import { AddPokemon } from "./AddPokemon";
 
-export default function Team(props) {
+export const Team = ({ team, selectedIndex, addPokemon, selectIndex }) => {
     return (
         <div className="flex gap-4 p-4 ">
-            {props.team.map((pokemon, index) => {
+            {team.map((pokemon, index) => {
                 return (
                     <div
                         className={
                             "w-16 h-16 rounded-2xl p-1 flex justify-center items-center duration-200 ease-out " +
-                            (props.index === index
+                            (selectedIndex === index
                                 ? "bg-button-selected shadow-inner "
                                 : "bg-white hover:bg-button-hover shadow-md cursor-pointer duration-200")
                         }
                         key={index}
-                        onClick={() => props.select(index)}
+                        onClick={() => selectIndex(index)}
                     >
                         <img
                             className="w-full h-full object-fit"
@@ -23,10 +23,10 @@ export default function Team(props) {
                     </div>
                 );
             })}
-            {props.team.length < 6 ? (
+            {team.length < 6 ? (
                 <div
                     className="w-16 h-16 bg-white rounded-2xl p-1 flex justify-center items-center shadow-xl hover:bg-button-hover cursor-pointer duration-200"
-                    onClick={() => props.addPokemon(props.team.length)}
+                    onClick={() => addPokemon(team.length)}
                 >
                     <AddPokemon />
                 </div>
@@ -35,4 +35,4 @@ export default function Team(props) {
             )}
         </div>
     );
-}
+};

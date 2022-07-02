@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Team from "./Team";
-import Pokemon from "./Pokemon";
+import { Team } from "./Team";
+import { Pokemon } from "./Pokemon";
 
 const maxId = 898;
 
-export default function Trainer(props) {
+export const Trainer = ({ version }) => {
     const [team, setTeam] = useState([]);
     const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -199,17 +199,17 @@ export default function Trainer(props) {
         );
     };
 
-    const selectMove = (newMoveIndex, move) => {
+    const selectMove = (newMoveIndex, newMove) => {
         setTeam(
             team.map((pokemon, index) =>
                 index === selectedIndex
                     ? {
                           ...pokemon,
                           selectedMoves: pokemon.selectedMoves.map(
-                              (currentMove, moveIndex) =>
+                              (currentMoveId, moveIndex) =>
                                   moveIndex === newMoveIndex
-                                      ? move
-                                      : currentMove
+                                      ? newMove
+                                      : currentMoveId
                           ),
                       }
                     : pokemon
@@ -227,26 +227,25 @@ export default function Trainer(props) {
                 </div>
                 <Team
                     team={team}
-                    index={selectedIndex}
-                    version={props.version}
+                    selectedIndex={selectedIndex}
                     addPokemon={(index) => addPokemon(index)}
-                    select={(index) => setSelectedIndex(index)}
+                    selectIndex={(index) => setSelectedIndex(index)}
                 />
                 {team.length > 0 ? (
                     <Pokemon
-                        team={team}
-                        index={selectedIndex}
                         pokemon={team[selectedIndex]}
-                        version={props.version}
+                        version={version}
                         selectPokemon={(id) => createPokemon(id, false)}
-                        removePokemon={removePokemon}
+                        removePokemon={() => removePokemon()}
                         changeAttribute={(attribute, value) =>
                             changeAttribute(attribute, value)
                         }
                         changeStat={(value, stat, type) =>
                             changeStat(value, stat, type)
                         }
-                        selectMove={(index, id) => selectMove(index, id)}
+                        selectMove={(newMoveIndex, newMove) =>
+                            selectMove(newMoveIndex, newMove)
+                        }
                     />
                 ) : (
                     <></>
@@ -254,4 +253,4 @@ export default function Trainer(props) {
             </div>
         </div>
     );
-}
+};

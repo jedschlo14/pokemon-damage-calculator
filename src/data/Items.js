@@ -6434,4 +6434,4 @@ for (var i = 1; i <= items.length; i++) {
     itemData.push({ value: i, label: items[i - 1].name.split("-").join(" ") });
 }
 
-export default itemData;
+export { itemData };

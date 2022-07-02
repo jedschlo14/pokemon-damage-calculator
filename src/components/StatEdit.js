@@ -1,14 +1,14 @@
-import StatEdit from "./StatRow";
-import stats from "../data/Stats";
+import { StatRow } from "components";
+import { stats } from "data";
 
-export default function Stats(props) {
+export const StatEdit = ({ pokemon, version, changeStat }) => {
     return (
         <>
             <div></div>
             <div className="flex justify-center items-center font-extrabold">
                 Base
             </div>
-            {props.version < 2 ? (
+            {version < 2 ? (
                 <>
                     <div className="flex justify-center items-center font-extrabold">
                         DVs
@@ -35,18 +35,18 @@ export default function Stats(props) {
             </div>
             {stats.map((stat, index) => {
                 return (
-                    <StatEdit
+                    <StatRow
                         key={index}
-                        version={props.version}
+                        version={version}
                         statLabel={stat.label}
                         statValue={stat.value}
-                        pokemon={props.pokemon}
+                        pokemon={pokemon}
                         changeStat={(value, stat, type) =>
-                            props.changeStat(value, stat, type)
+                            changeStat(value, stat, type)
                         }
                     />
                 );
             })}
         </>
     );
-}
+};

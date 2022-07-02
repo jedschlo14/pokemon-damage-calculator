@@ -1,6 +1,6 @@
-import Selector from "./Selector";
+import { Selector } from "./Selector";
 
-export default function Moves(props) {
+export const Moves = ({ pokemon, selectMove }) => {
     return (
         <>
             <div className="col-span-2"></div>
@@ -12,13 +12,13 @@ export default function Moves(props) {
                 return (
                     <div className="col-span-3 capitalize" key={index}>
                         <Selector
-                            id={props.pokemon["selectedMoves"][index]}
-                            data={props.pokemon["moves"]}
-                            onChange={(id) => props.selectMove(index, id)}
+                            id={pokemon["selectedMoves"][index]}
+                            data={pokemon["moves"]}
+                            onChange={(id) => selectMove(index, id)}
                         />
                     </div>
                 );
             })}
         </>
     );
-}
+};

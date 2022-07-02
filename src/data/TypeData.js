@@ -1,4 +1,4 @@
-const types = [
+export const types = [
     { value: 0, label: "Normal" },
     { value: 1, label: "Fire" },
     { value: 2, label: "Water" },
@@ -18,5 +18,3 @@ const types = [
     { value: 16, label: "Steel" },
     { value: 17, label: "Fairy" },
 ];
-
-export default types;

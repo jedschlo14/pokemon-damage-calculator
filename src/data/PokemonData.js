@@ -4731,4 +4731,4 @@ for (var i = 1; i <= data.length; i++) {
   pkmnData.push({ value: i, label: data[i - 1].name });
 }
 
-export default pkmnData;
+export { pkmnData };

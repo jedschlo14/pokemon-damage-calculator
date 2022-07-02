@@ -1,4 +1,4 @@
-export default function Types(props) {
+export const Types = (props) => {
     return (
         <div className="flex flex-col justify-center items-center gap-4 col-span-2 row-span-3">
             {props.pokemon.types.map((type, index) => {
@@ -16,7 +16,7 @@ export default function Types(props) {
             })}
         </div>
     );
-}
+};
 
 // (type === "normal" ? "bg-type-normal" : "") +
 // (type === "fire" ? "bg-type-fire" : "") +
