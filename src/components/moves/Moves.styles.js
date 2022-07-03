@@ -1,10 +1,8 @@
 import styled from "@emotion/styled";
+import { CenteredFlexbox } from "assets/styles/Common.styles";
 
-export const MovesTitle = styled.div`
+export const MovesTitle = styled(CenteredFlexbox)`
     grid-column: span 6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-weight: 800;
 `;
 
