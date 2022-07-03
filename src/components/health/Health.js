@@ -1,4 +1,5 @@
-import { NumberEntry, ProgressBar } from "components";
+import { NumberEntry } from "components/numberEntry";
+import { ProgressBar } from "components/progressBar";
 
 export const Health = ({ pokemon, changeStat }) => {
     const final =

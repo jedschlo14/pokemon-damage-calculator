@@ -1,4 +1,4 @@
-import { AddPokemon } from "containers/Trainer";
+import { AddPokemon } from "./AddPokemon";
 
 export const Team = ({ team, selectedIndex, addPokemon, selectIndex }) => {
     return (

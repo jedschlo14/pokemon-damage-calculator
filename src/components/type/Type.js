@@ -1,7 +1,7 @@
-export const Types = (props) => {
+export const Type = ({ pokemon }) => {
     return (
         <div className="flex flex-col justify-center items-center gap-4 col-span-2 row-span-3">
-            {props.pokemon.types.map((type, index) => {
+            {pokemon.types.map((type, index) => {
                 return (
                     <div
                         className={

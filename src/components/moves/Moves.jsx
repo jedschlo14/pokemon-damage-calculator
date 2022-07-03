@@ -1,13 +1,14 @@
-import { Selector } from "components";
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx } from "@emotion/react";
+import { Fragment } from "react";
+import { Selector } from "components/selector";
+import { MovesTitle } from "./Moves.styles";
 
 export const Moves = ({ pokemon, selectMove }) => {
     return (
-        <>
-            <div className="col-span-2"></div>
-            <div className="col-span-2 flex justify-center items-center font-extrabold">
-                Moves:
-            </div>
-            <div className="col-span-2"></div>
+        <Fragment>
+            <MovesTitle>Moves:</MovesTitle>
             {[...Array(4).keys()].map((_, index) => {
                 return (
                     <div className="col-span-3 capitalize" key={index}>
@@ -19,6 +20,6 @@ export const Moves = ({ pokemon, selectMove }) => {
                     </div>
                 );
             })}
-        </>
+        </Fragment>
     );
 };

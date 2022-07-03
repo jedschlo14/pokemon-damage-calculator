@@ -1,11 +1,9 @@
-import {
-    Selector,
-    NumberEntry,
-    Types,
-    StatEdit,
-    Moves,
-    Health,
-} from "components";
+import { Selector } from "components/selector";
+import { NumberEntry } from "components/numberEntry";
+import { Type } from "components/type";
+import { StatEdit } from "components/stats";
+import { Moves } from "components/moves";
+import { Health } from "components/health";
 import { pkmnData, natures, statuses, itemData } from "data";
 
 export const Pokemon = ({
@@ -64,7 +62,7 @@ export const Pokemon = ({
                     />
                 </div>
                 {pokemon.hasOwnProperty("types") ? (
-                    <Types pokemon={pokemon} />
+                    <Type pokemon={pokemon} />
                 ) : (
                     <></>
                 )}

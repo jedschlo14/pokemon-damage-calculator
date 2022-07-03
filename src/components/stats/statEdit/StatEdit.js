@@ -1,4 +1,4 @@
-import { StatRow } from "components";
+import { StatRow } from "components/stats/statRow";
 import { stats } from "data";
 
 export const StatEdit = ({ pokemon, version, changeStat }) => {

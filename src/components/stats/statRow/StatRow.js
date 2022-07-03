@@ -1,4 +1,5 @@
-import { NumberEntry, Selector } from "components";
+import { NumberEntry } from "components/numberEntry";
+import { Selector } from "components/selector";
 import { stages, natures } from "data";
 
 export const StatRow = ({
