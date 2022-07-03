@@ -14,8 +14,8 @@ export const dark = {
         empty: pallete.gray,
     },
     typography: {
-        default: pallete.white,
         special: pallete.cyan,
+        inverted: pallete.white,
     },
     types: {
         normal: "#A8A77A",
@@ -36,5 +36,14 @@ export const dark = {
         dark: "#705746",
         steel: "#B7B7CE",
         fairy: "#D685AD",
+    },
+    button: {
+        selected: "#0ea5e9",
+        hover: "#bae6fd",
+        secondary: {
+            default: "#ef4444",
+            hover: "#dc2626",
+            disabled: "#71717a",
+        },
     },
 };
