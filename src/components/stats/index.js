@@ -1,2 +1,2 @@
-export * from "./statEdit";
+export * from "./Stats";
 export * from "./statRow";

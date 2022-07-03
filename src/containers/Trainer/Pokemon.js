@@ -1,7 +1,7 @@
 import { Selector } from "components/selector";
 import { NumberEntry } from "components/numberEntry";
 import { Type } from "components/type";
-import { StatEdit } from "components/stats";
+import { Stats } from "components/stats";
 import { Moves } from "components/moves";
 import { Health } from "components/health";
 import { pkmnData, natures, statuses, itemData } from "data";
@@ -86,7 +86,7 @@ export const Pokemon = ({
                         onChange={(id) => changeAttribute("status", id)}
                     />
                 </div>
-                <StatEdit
+                <Stats
                     pokemon={pokemon}
                     version={version}
                     changeStat={(value, stat, type) =>

@@ -1,6 +1,12 @@
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx } from "@emotion/react";
+import { CenteredFlexbox } from "assets/styles/Common.styles";
 import { NumberEntry } from "components/numberEntry";
 import { Selector } from "components/selector";
 import { stages, natures } from "data";
+import { Fragment } from "react";
+import { StatRowTitle } from "./StatRow.styles";
 
 export const StatRow = ({
     version,
@@ -45,44 +51,21 @@ export const StatRow = ({
     };
 
     return (
-        <>
-            <div className="flex justify-center items-center font-extrabold">
-                {statLabel}
-            </div>
-            <div className="flex justify-center items-center">
-                {pokemon.stats[statValue].base}
-            </div>
-            {version < 2 ? (
-                <>
-                    <NumberEntry
-                        value={other("iv")}
-                        min={0}
-                        max={31}
-                        onChange={(e) => changeStat(e, statValue, "iv")}
-                    />
-                    <NumberEntry
-                        value={other("ev")}
-                        min={0}
-                        max={65535}
-                        onChange={(e) => changeStat(e, statValue, "ev")}
-                    />
-                </>
-            ) : (
-                <>
-                    <NumberEntry
-                        value={other("iv")}
-                        min={0}
-                        max={31}
-                        onChange={(e) => changeStat(e, statValue, "iv")}
-                    />
-                    <NumberEntry
-                        value={other("ev")}
-                        min={0}
-                        max={255}
-                        onChange={(e) => changeStat(e, statValue, "ev")}
-                    />
-                </>
-            )}
+        <Fragment>
+            <StatRowTitle>{statLabel}</StatRowTitle>
+            <CenteredFlexbox>{pokemon.stats[statValue].base}</CenteredFlexbox>
+            <NumberEntry
+                value={other("iv")}
+                min={0}
+                max={31}
+                onChange={(e) => changeStat(e, statValue, "iv")}
+            />
+            <NumberEntry
+                value={other("ev")}
+                min={0}
+                max={version < 2 ? 65535 : 255}
+                onChange={(e) => changeStat(e, statValue, "ev")}
+            />
             <NumberEntry
                 value={final()}
                 min={0}
@@ -100,6 +83,6 @@ export const StatRow = ({
                     onChange={(id) => changeStat(id, statValue, "stage")}
                 />
             )}
-        </>
+        </Fragment>
     );
 };
