@@ -1,5 +1,5 @@
 import { Trainer } from "containers/trainer";
-import { VersionSelector } from "containers/VersionSelector";
+import { VersionSelector } from "containers/versionSelector";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 

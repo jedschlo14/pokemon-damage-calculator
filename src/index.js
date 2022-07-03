@@ -6,17 +6,20 @@ import "./assets/styles/tailwind.css";
 import "./index.css";
 import Landing from "./pages/Landing";
 import About from "./pages/About";
+import { EmotionProvider } from "containers/emotionProvider";
 
 const rootElement = document.getElementById("root");
 render(
-    <BrowserRouter>
-        <Routes>
-            <Route path="/:version" element={<Landing />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/" element={<Navigate to="/4" />} />
-            <Route path="*" element={<div>404</div>} />
-        </Routes>
-    </BrowserRouter>,
+    <EmotionProvider>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/:version" element={<Landing />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/" element={<Navigate to="/4" />} />
+                <Route path="*" element={<div>404</div>} />
+            </Routes>
+        </BrowserRouter>
+    </EmotionProvider>,
     rootElement
 );
 
