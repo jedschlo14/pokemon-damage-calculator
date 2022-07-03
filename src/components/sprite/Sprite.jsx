@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx } from "@emotion/react";
+import { useState } from "react";
+import { SpriteImage } from "./Sprite.styles";
 
 export const Sprite = ({ id }) => {
     const [sprite, setSprite] = useState();
@@ -12,5 +16,5 @@ export const Sprite = ({ id }) => {
             setName(pokeData.name);
         });
 
-    return <img className="w-full h-full object-fit" src={sprite} alt={name} />;
+    return <SpriteImage src={sprite} alt={name} />;
 };

@@ -87,7 +87,7 @@ export const StatRow = ({
                 value={final()}
                 min={0}
                 max={2499}
-                color={pokemon.stats[statValue].stage === 7 ? false : true}
+                color={pokemon.stats[statValue].stage === 7 ? 0 : 1}
                 onChange={(id) => changeStat(id, statValue, "final")}
             />
             {statValue === "hp" ? (

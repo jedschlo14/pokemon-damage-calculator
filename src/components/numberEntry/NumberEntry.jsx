@@ -1,4 +1,7 @@
-import { NumberEntryInput, NumberEntryWrapper } from "./NumberEntry.styles";
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx } from "@emotion/react";
+import { NumberEntryInput } from "./NumberEntry.styles";
 import { CenteredFlexbox } from "assets/styles/Common.styles";
 
 export const NumberEntry = ({ value, min, max, onChange, color }) => {
