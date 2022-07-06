@@ -1,3 +1,6 @@
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx } from "@emotion/react";
 import { Selector } from "components/selector";
 import { NumberEntry } from "components/numberEntry";
 import { Type } from "components/type";

@@ -1,6 +1,10 @@
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx } from "@emotion/react";
 import { useState } from "react";
-import { Team } from "./Team";
-import { Pokemon } from "./Pokemon";
+import { Team } from "./team/Team";
+import { Pokemon } from "./pokemon/Pokemon";
+import { TrainerHeader, TrainerWrapper } from "./Trainer.styles";
 
 const maxId = 898;
 
@@ -218,39 +222,31 @@ export const Trainer = ({ version }) => {
     };
 
     return (
-        <div>
-            <div className="w-[31rem] bg-light shadow-md rounded-2xl">
-                <div className="bg-title p-4 flex justify-center items-center rounded-2xl">
-                    <div className="text-white font-extrabold text-lg">
-                        Team
-                    </div>
-                </div>
-                <Team
-                    team={team}
-                    selectedIndex={selectedIndex}
-                    addPokemon={(index) => addPokemon(index)}
-                    selectIndex={(index) => setSelectedIndex(index)}
+        <TrainerWrapper>
+            <TrainerHeader>Team</TrainerHeader>
+            <Team
+                team={team}
+                selectedIndex={selectedIndex}
+                addPokemon={(index) => addPokemon(index)}
+                selectIndex={(index) => setSelectedIndex(index)}
+            />
+            {team.length > 0 ? (
+                <Pokemon
+                    pokemon={team[selectedIndex]}
+                    version={version}
+                    selectPokemon={(id) => createPokemon(id, false)}
+                    removePokemon={() => removePokemon()}
+                    changeAttribute={(attribute, value) =>
+                        changeAttribute(attribute, value)
+                    }
+                    changeStat={(value, stat, type) =>
+                        changeStat(value, stat, type)
+                    }
+                    selectMove={(newMoveIndex, newMove) =>
+                        selectMove(newMoveIndex, newMove)
+                    }
                 />
-                {team.length > 0 ? (
-                    <Pokemon
-                        pokemon={team[selectedIndex]}
-                        version={version}
-                        selectPokemon={(id) => createPokemon(id, false)}
-                        removePokemon={() => removePokemon()}
-                        changeAttribute={(attribute, value) =>
-                            changeAttribute(attribute, value)
-                        }
-                        changeStat={(value, stat, type) =>
-                            changeStat(value, stat, type)
-                        }
-                        selectMove={(newMoveIndex, newMove) =>
-                            selectMove(newMoveIndex, newMove)
-                        }
-                    />
-                ) : (
-                    <></>
-                )}
-            </div>
-        </div>
+            ) : null}
+        </TrainerWrapper>
     );
 };

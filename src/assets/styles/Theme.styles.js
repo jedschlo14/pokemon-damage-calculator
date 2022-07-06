@@ -8,6 +8,8 @@ const pallete = {
 export const dark = {
     background: {
         entry: pallete.white,
+        title: "#0284c7",
+        light: "#7dd3fc",
     },
     progressBar: {
         fill: pallete.blue,
@@ -38,6 +40,7 @@ export const dark = {
         fairy: "#D685AD",
     },
     button: {
+        default: pallete.white,
         selected: "#0ea5e9",
         hover: "#bae6fd",
         secondary: {
