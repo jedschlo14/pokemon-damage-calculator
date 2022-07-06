@@ -2,7 +2,6 @@ import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
-import "./assets/styles/tailwind.css";
 import "./index.css";
 import { Landing, About, PageNotFound } from "./pages";
 import { EmotionProvider } from "containers/emotionProvider";

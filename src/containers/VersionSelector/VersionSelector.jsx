@@ -20,7 +20,7 @@ export const VersionSelector = ({ version, onChange }) => {
                             selected={version === index ? 1 : 0}
                             key={index}
                             onClick={() => onChange(index)}
-                            to={`/${index + 1}`}
+                            to={`/home/${index + 1}`}
                         >
                             {name}
                         </VersionSelectorItem>

@@ -1,8 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from "@emotion/react";
-import { AddPokemon } from "./AddPokemon";
-import { TeamItem, TeamWrapper, Sprite } from "./Team.styles";
+import { TeamItem, TeamWrapper, Sprite, Cross } from "./Team.styles";
 
 export const Team = ({ team, selectedIndex, addPokemon, selectIndex }) => {
     return (
@@ -20,7 +19,7 @@ export const Team = ({ team, selectedIndex, addPokemon, selectIndex }) => {
             })}
             {team.length < 6 ? (
                 <TeamItem onClick={() => addPokemon(team.length)}>
-                    <AddPokemon />
+                    <Cross />
                 </TeamItem>
             ) : null}
         </TeamWrapper>

@@ -27,6 +27,25 @@ export const TeamItem = styled(CenteredFlexbox)`
     }
 `;
 
+export const Cross = styled.div`
+    background-color: ${({ theme }) => theme.cross.color};
+    height: 40px;
+    position: relative;
+    width: 6px;
+    border-radius: 1px;
+
+    &::after {
+        background-color: ${({ theme }) => theme.cross.color};
+        position: absolute;
+        content: "";
+        height: 6px;
+        width: 40px;
+        left: -17px;
+        top: 17px;
+        border-radius: 1px;
+    }
+`;
+
 export const Sprite = styled.img`
     width: 100%;
     height: 100%;

@@ -44,4 +44,6 @@ export const VersionSelectorItem = styled(Link)`
             selected ? theme.button.selected : theme.button.hover};
         cursor: ${({ selected }) => (selected ? "default" : "pointer")};
     }
+    text-decoration: none;
+    color: inherit;
 `;

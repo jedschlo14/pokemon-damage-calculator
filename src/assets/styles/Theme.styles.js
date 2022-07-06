@@ -1,11 +1,13 @@
 const pallete = {
+    black: "#000000",
     white: "#ffffff",
-    gray: "#374151",
-    blue: "#3b82f6",
     cyan: "#0284c7",
 };
 
 export const dark = {
+    cross: {
+        color: pallete.black,
+    },
     background: {
         entry: pallete.white,
         title: "#0284c7",
@@ -13,8 +15,8 @@ export const dark = {
         dark: "#0c4a6e",
     },
     progressBar: {
-        fill: pallete.blue,
-        empty: pallete.gray,
+        fill: "#3b82f6",
+        empty: "#374151",
     },
     typography: {
         special: pallete.cyan,

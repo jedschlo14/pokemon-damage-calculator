@@ -9,8 +9,7 @@ export const TypeWrapper = styled(CenteredFlexbox)`
 `;
 
 export const TypeItem = styled(CenteredFlexbox)`
-    padding: 0.5rem;
-    height: 2.5rem;
+    height: 2rem;
     width: 6rem;
     border-radius: 0.5rem;
     text-transform: capitalize;
