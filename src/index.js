@@ -4,8 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import "./assets/styles/tailwind.css";
 import "./index.css";
-import Landing from "./pages/Landing";
-import About from "./pages/About";
+import { Landing, About, PageNotFound } from "./pages";
 import { EmotionProvider } from "containers/emotionProvider";
 
 const rootElement = document.getElementById("root");
@@ -13,10 +12,10 @@ render(
     <EmotionProvider>
         <BrowserRouter>
             <Routes>
-                <Route path="/:version" element={<Landing />} />
+                <Route path="/home/:version" element={<Landing />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/" element={<Navigate to="/4" />} />
-                <Route path="*" element={<div>404</div>} />
+                <Route path="/" element={<Navigate to="/home/4" />} />
+                <Route path="*" element={<PageNotFound />} />
             </Routes>
         </BrowserRouter>
     </EmotionProvider>,

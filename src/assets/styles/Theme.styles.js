@@ -10,6 +10,7 @@ export const dark = {
         entry: pallete.white,
         title: "#0284c7",
         light: "#7dd3fc",
+        dark: "#0c4a6e",
     },
     progressBar: {
         fill: pallete.blue,
