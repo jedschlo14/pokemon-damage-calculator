@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from "@emotion/react";
-import { Selector } from "components/selector";
+import { Autocomplete } from "components/autocomplete";
 import { NumberEntry } from "components/numberEntry";
 import { Type } from "components/type";
 import { Stats } from "components/stats";
@@ -30,7 +30,7 @@ export const Pokemon = ({
     return (
         <PokemonGrid>
             <FourColumnSpan>
-                <Selector
+                <Autocomplete
                     id={pokemon.id}
                     data={pkmnData}
                     onChange={(id) => selectPokemon(id)}
@@ -39,7 +39,7 @@ export const Pokemon = ({
             <RemoveButton onClick={removePokemon}>Remove</RemoveButton>
             <AttributeTitle>Nature:</AttributeTitle>
             <SelectorWrapper>
-                <Selector
+                <Autocomplete
                     id={pokemon.nature}
                     data={natures}
                     onChange={(id) => changeAttribute("nature", id)}
@@ -56,7 +56,7 @@ export const Pokemon = ({
             </PokemonLevel>
             <AttributeTitle>Ability:</AttributeTitle>
             <SelectorWrapper>
-                <Selector
+                <Autocomplete
                     id={pokemon.ability}
                     data={pokemon.abilities}
                     onChange={(id) => changeAttribute("ability", id)}
@@ -69,7 +69,7 @@ export const Pokemon = ({
             )}
             <AttributeTitle>Item:</AttributeTitle>
             <SelectorWrapper>
-                <Selector
+                <Autocomplete
                     id={pokemon.item}
                     data={itemData}
                     onChange={(id) => changeAttribute("item", id)}
@@ -77,7 +77,7 @@ export const Pokemon = ({
             </SelectorWrapper>
             <AttributeTitle>Status:</AttributeTitle>
             <SelectorWrapper>
-                <Selector
+                <Autocomplete
                     id={pokemon.status}
                     data={statuses}
                     onChange={(id) => changeAttribute("status", id)}

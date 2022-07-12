@@ -3,7 +3,7 @@
 import { jsx } from "@emotion/react";
 import { CenteredFlexbox } from "assets/styles/Common.styles";
 import { NumberEntry } from "components/numberEntry";
-import { Selector } from "components/selector";
+import { Autocomplete } from "components/autocomplete";
 import { stages, natures } from "data";
 import { Fragment } from "react";
 import { StatRowTitle } from "./StatRow.styles";
@@ -76,7 +76,7 @@ export const StatRow = ({
             {statValue === "hp" ? (
                 <div></div>
             ) : (
-                <Selector
+                <Autocomplete
                     id={pokemon.stats[statValue].stage}
                     centered
                     data={stages}

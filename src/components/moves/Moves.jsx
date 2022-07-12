@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/react";
 import { Fragment } from "react";
-import { Selector } from "components/selector";
+import { Autocomplete } from "components/autocomplete";
 import { MovesTitle, MoveSelectorWrapper } from "./Moves.styles";
 
 export const Moves = ({ pokemon, selectMove }) => {
@@ -12,7 +12,7 @@ export const Moves = ({ pokemon, selectMove }) => {
             {[...Array(4).keys()].map((_, index) => {
                 return (
                     <MoveSelectorWrapper key={index}>
-                        <Selector
+                        <Autocomplete
                             id={pokemon["selectedMoves"][index]}
                             data={pokemon["moves"]}
                             onChange={(id) => selectMove(index, id)}

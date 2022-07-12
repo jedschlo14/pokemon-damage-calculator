@@ -1,7 +1,7 @@
 import ReactSelect from "react-select";
 import styled from "@emotion/styled";
 
-export const MultiSelect = styled(ReactSelect)`
+export const StyledAutocomplete = styled(ReactSelect)`
     &.react-select-container {
     }
 

@@ -1,10 +1,10 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from "@emotion/react";
-import { MultiSelect } from "./Selector.styles";
+import { StyledAutocomplete } from "./Autocomplete.styles";
 
-export const Selector = ({ id, data, onChange, centered }) => (
-    <MultiSelect
+export const Autocomplete = ({ id, data, onChange, centered }) => (
+    <StyledAutocomplete
         className="react-select-container"
         classNamePrefix="react-select"
         components={{
