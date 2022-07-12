@@ -13,7 +13,7 @@ import {
     PokemonGrid,
     SelectorWrapper,
     AttributeTitle,
-    PokemonLevel,
+    TwoColumnSpan,
     RemoveButton,
 } from "./Pokemon.styles";
 
@@ -36,7 +36,9 @@ export const Pokemon = ({
                     onChange={(id) => selectPokemon(id)}
                 />
             </FourColumnSpan>
-            <RemoveButton onClick={removePokemon}>Remove</RemoveButton>
+            <TwoColumnSpan>
+                <RemoveButton onClick={removePokemon}>Remove</RemoveButton>
+            </TwoColumnSpan>
             <AttributeTitle>Nature:</AttributeTitle>
             <SelectorWrapper>
                 <Autocomplete
@@ -45,7 +47,7 @@ export const Pokemon = ({
                     onChange={(id) => changeAttribute("nature", id)}
                 />
             </SelectorWrapper>
-            <PokemonLevel>
+            <TwoColumnSpan>
                 Level:
                 <NumberEntry
                     value={pokemon.level}
@@ -53,7 +55,7 @@ export const Pokemon = ({
                     max={100}
                     onChange={(value) => changeAttribute("level", value)}
                 />
-            </PokemonLevel>
+            </TwoColumnSpan>
             <AttributeTitle>Ability:</AttributeTitle>
             <SelectorWrapper>
                 <Autocomplete

@@ -9,8 +9,8 @@ export const TypeWrapper = styled(CenteredFlexbox)`
 `;
 
 export const TypeItem = styled(CenteredFlexbox)`
-    height: 2rem;
-    width: 6rem;
+    height: 2.25rem;
+    width: 6.5rem;
     border-radius: 0.5rem;
     text-transform: capitalize;
     color: ${({ theme }) => theme.typography.inverted};
