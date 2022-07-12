@@ -5,15 +5,26 @@ const pallete = {
 };
 
 export const dark = {
-    cross: {
-        color: pallete.black,
-    },
     background: {
         entry: pallete.white,
         title: "#0284c7",
         light: "#7dd3fc",
         dark: "#0c4a6e",
     },
+    button: {
+        default: pallete.white,
+        selected: "#0ea5e9",
+        hover: "#bae6fd",
+        secondary: {
+            default: "#ef4444",
+            hover: "#dc2626",
+            disabled: "#71717a",
+        },
+    },
+    cross: {
+        color: pallete.black,
+    },
+    pallete,
     progressBar: {
         fill: "#3b82f6",
         empty: "#374151",
@@ -41,15 +52,5 @@ export const dark = {
         dark: "#705746",
         steel: "#B7B7CE",
         fairy: "#D685AD",
-    },
-    button: {
-        default: pallete.white,
-        selected: "#0ea5e9",
-        hover: "#bae6fd",
-        secondary: {
-            default: "#ef4444",
-            hover: "#dc2626",
-            disabled: "#71717a",
-        },
     },
 };
