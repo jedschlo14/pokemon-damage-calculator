@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/react";
 import { Fragment } from "react";
-import { Autocomplete } from "components/autocomplete";
+import { Autocomplete } from "components/inputs/autocomplete";
 import { MovesTitle, MoveSelectorWrapper } from "./Moves.styles";
 
 export const Moves = ({ pokemon, selectMove }) => {

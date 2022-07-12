@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from "@emotion/react";
-import { NumberEntry } from "components/numberEntry";
+import { NumberEntry } from "components/inputs/numberEntry";
 import { ProgressBar } from "./progressBar";
 import { HealthEditWrapper, HealthWrapper } from "./Health.styles";
 

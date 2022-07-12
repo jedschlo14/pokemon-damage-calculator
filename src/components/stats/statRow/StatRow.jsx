@@ -2,8 +2,8 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/react";
 import { CenteredFlexbox } from "assets/styles/Common.styles";
-import { NumberEntry } from "components/numberEntry";
-import { Autocomplete } from "components/autocomplete";
+import { NumberEntry } from "components/inputs/numberEntry";
+import { Autocomplete } from "components/inputs/autocomplete";
 import { stages, natures } from "data";
 import { Fragment } from "react";
 import { StatRowTitle } from "./StatRow.styles";

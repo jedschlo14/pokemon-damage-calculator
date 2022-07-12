@@ -1,8 +1,8 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from "@emotion/react";
-import { Autocomplete } from "components/autocomplete";
-import { NumberEntry } from "components/numberEntry";
+import { Autocomplete } from "components/inputs/autocomplete";
+import { NumberEntry } from "components/inputs/numberEntry";
 import { Type } from "components/type";
 import { Stats } from "components/stats";
 import { Moves } from "components/moves";
