@@ -15,39 +15,46 @@ export const StatRow = ({
     pokemon,
     changeStat,
 }) => {
-    const other = (stat) => {
-        if (pokemon.stats[statValue][stat] === -1) return "";
-        return pokemon.stats[statValue][stat];
-    };
-
-    const final = () => {
-        const versionOldOrNew = version < 2 ? "old" : "new";
-        if (pokemon.stats[statValue].final !== -1)
-            return (
-                pokemon.stats[statValue].final *
-                stages[pokemon.stats[statValue]["stage"] - 1][versionOldOrNew]
-            );
-        const level = pokemon["level"];
-        if (level === 0) return 0;
-        const pokemonNature = pokemon["nature"];
-        const iv = pokemon.stats[statValue]["iv"];
-        const ev = pokemon.stats[statValue]["ev"];
-        const bonus = statValue === "hp" ? level + 10 : 5;
-        var nature = 1;
-        if (natures[pokemonNature - 1]["info"][0] === statValue) nature += 0.1;
-        if (natures[pokemonNature - 1]["info"][1] === statValue) nature -= 0.1;
-        return Math.floor(
-            (Math.floor(
-                ((2 * pokemon.stats[statValue]["base"] +
-                    iv +
-                    Math.floor(ev / 4)) *
-                    level) /
-                    100
-            ) +
-                bonus) *
-                stages[pokemon.stats[statValue]["stage"] - 1][versionOldOrNew] *
-                nature
-        );
+    const displayStat = (stat) => {
+        switch (stat) {
+            case "final":
+                const versionOldOrNew = version < 2 ? "old" : "new";
+                if (pokemon.stats[statValue].final !== -1)
+                    return (
+                        pokemon.stats[statValue].final *
+                        stages[pokemon.stats[statValue]["stage"] - 1][
+                            versionOldOrNew
+                        ]
+                    );
+                const level = pokemon["level"];
+                if (level === 0) return 0;
+                const pokemonNature = pokemon["nature"];
+                const iv = pokemon.stats[statValue]["iv"];
+                const ev = pokemon.stats[statValue]["ev"];
+                const bonus = statValue === "hp" ? level + 10 : 5;
+                var nature = 1;
+                if (natures[pokemonNature - 1]["info"][0] === statValue)
+                    nature += 0.1;
+                if (natures[pokemonNature - 1]["info"][1] === statValue)
+                    nature -= 0.1;
+                return Math.floor(
+                    (Math.floor(
+                        ((2 * pokemon.stats[statValue]["base"] +
+                            iv +
+                            Math.floor(ev / 4)) *
+                            level) /
+                            100
+                    ) +
+                        bonus) *
+                        stages[pokemon.stats[statValue]["stage"] - 1][
+                            versionOldOrNew
+                        ] *
+                        nature
+                );
+            default:
+                if (pokemon.stats[statValue][stat] === -1) return "";
+                return pokemon.stats[statValue][stat];
+        }
     };
 
     return (
@@ -55,19 +62,19 @@ export const StatRow = ({
             <StatRowTitle>{statLabel}</StatRowTitle>
             <CenteredFlexbox>{pokemon.stats[statValue].base}</CenteredFlexbox>
             <NumberEntry
-                value={other("iv")}
+                value={displayStat("iv")}
                 min={0}
                 max={31}
                 onChange={(e) => changeStat(e, statValue, "iv")}
             />
             <NumberEntry
-                value={other("ev")}
+                value={displayStat("ev")}
                 min={0}
                 max={version < 2 ? 65535 : 255}
                 onChange={(e) => changeStat(e, statValue, "ev")}
             />
             <NumberEntry
-                value={final()}
+                value={displayStat("final")}
                 min={0}
                 max={2499}
                 color={pokemon.stats[statValue].stage === 7 ? 0 : 1}
