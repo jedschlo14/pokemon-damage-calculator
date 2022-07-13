@@ -10,7 +10,7 @@ export const VersionSelectorWrapper = styled.div`
 
 export const VersionSelectorHeader = styled(CenteredFlexbox)`
     padding: 1rem;
-    border-radius: 1rem;
+    border-radius: 0.75rem;
     background-color: ${({ theme }) => theme.background.title};
     color: ${({ theme }) => theme.typography.inverted};
     font-weight: 800;

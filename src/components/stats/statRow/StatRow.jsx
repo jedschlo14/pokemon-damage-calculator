@@ -76,12 +76,14 @@ export const StatRow = ({
             {statValue === "hp" ? (
                 <div></div>
             ) : (
-                <Autocomplete
-                    id={pokemon.stats[statValue].stage}
-                    centered
-                    data={stages}
-                    onChange={(id) => changeStat(id, statValue, "stage")}
-                />
+                <CenteredFlexbox>
+                    <Autocomplete
+                        centered
+                        id={pokemon.stats[statValue].stage}
+                        data={stages}
+                        onChange={(id) => changeStat(id, statValue, "stage")}
+                    />
+                </CenteredFlexbox>
             )}
         </Fragment>
     );

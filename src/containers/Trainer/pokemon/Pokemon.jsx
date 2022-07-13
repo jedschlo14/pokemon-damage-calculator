@@ -31,6 +31,7 @@ export const Pokemon = ({
         <PokemonGrid>
             <FourColumnSpan>
                 <Autocomplete
+                    header
                     id={pokemon.id}
                     data={pkmnData}
                     onChange={(id) => selectPokemon(id)}

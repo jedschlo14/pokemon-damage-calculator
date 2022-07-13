@@ -29,20 +29,20 @@ export const TeamItem = styled(CenteredFlexbox)`
 
 export const Cross = styled.div`
     background-color: ${({ theme }) => theme.cross.color};
-    height: 40px;
+    height: 3.25rem;
     position: relative;
-    width: 6px;
-    border-radius: 1px;
+    width: 0.45rem;
+    border-radius: 0.2rem;
 
     &::after {
         background-color: ${({ theme }) => theme.cross.color};
         position: absolute;
         content: "";
-        height: 6px;
-        width: 40px;
-        left: -17px;
-        top: 17px;
-        border-radius: 1px;
+        height: 0.45rem;
+        width: 3.25rem;
+        left: -1.4rem;
+        top: 1.4rem;
+        border-radius: 0.2rem;
     }
 `;
 

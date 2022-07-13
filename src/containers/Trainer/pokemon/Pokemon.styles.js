@@ -4,15 +4,14 @@ import { CenteredFlexbox } from "assets/styles/Common.styles";
 export const PokemonGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 0.65rem;
-    padding-bottom: 1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    gap: 0.5rem;
+    padding: 0 1rem 1rem 1rem;
     font-weight: 700;
 `;
 
 export const RemoveButton = styled(CenteredFlexbox)`
-    height: 100%;
+    // height: 100%;
+    height: 2.25rem;
     width: 8rem;
     border-radius: 0.5rem;
     color: ${({ theme }) => theme.typography.inverted};
