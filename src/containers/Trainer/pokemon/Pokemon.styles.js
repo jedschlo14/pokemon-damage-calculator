@@ -26,6 +26,7 @@ export const RemoveButton = styled(CenteredFlexbox)`
 
 export const FourColumnSpan = styled.div`
     grid-column: span 4;
+    text-transform: capitalize;
 `;
 
 export const SelectorWrapper = styled.div`
@@ -39,5 +40,6 @@ export const TwoColumnSpan = styled(CenteredFlexbox)`
 `;
 
 export const AttributeTitle = styled(CenteredFlexbox)`
+    justify-content: end;
     font-weight: 800;
 `;

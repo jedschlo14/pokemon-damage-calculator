@@ -18,7 +18,7 @@ export const Trainer = ({ version }) => {
             sprite: "",
             types: [],
             level: 0,
-            nature: 2,
+            nature: "bashful",
             abilities: [],
             ability: 1,
             item: 0,
@@ -42,13 +42,9 @@ export const Trainer = ({ version }) => {
             moves: [{}],
             selectedMoves: [0, 0, 0, 0],
         };
-        const url =
-            "https://pokeapi.co/api/v2/pokemon/" +
-            newPokemon.id.toString() +
-            "/";
-        fetch(url)
-            .then((response) => response.json())
-            .then(function (pokeData) {
+        fetch(`https://pokeapi.co/api/v2/pokemon/${newPokemon.id}`)
+            .then((res) => res.json())
+            .then((pokeData) => {
                 newPokemon.name = pokeData.name;
                 newPokemon.level = 50;
                 // newPokemon.sprite = pokeData.sprites.front_default;

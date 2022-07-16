@@ -4,7 +4,7 @@ import { jsx } from "@emotion/react";
 import { CenteredFlexbox } from "assets/styles/Common.styles";
 import { NumberEntry } from "components/inputs/numberEntry";
 import { Autocomplete } from "components/inputs/autocomplete";
-import { stages, natures } from "data";
+import { stages, natureValues } from "data";
 import { Fragment } from "react";
 import { StatRowTitle } from "./StatRow.styles";
 
@@ -28,15 +28,23 @@ export const StatRow = ({
                     );
                 const level = pokemon["level"];
                 if (level === 0) return 0;
-                const pokemonNature = pokemon["nature"];
                 const iv = pokemon.stats[statValue]["iv"];
                 const ev = pokemon.stats[statValue]["ev"];
                 const bonus = statValue === "hp" ? level + 10 : 5;
-                var nature = 1;
-                if (natures[pokemonNature - 1]["info"][0] === statValue)
-                    nature += 0.1;
-                if (natures[pokemonNature - 1]["info"][1] === statValue)
-                    nature -= 0.1;
+                const nature = natureValues[pokemon.nature];
+                const natureMultiplier =
+                    1 +
+                    (nature.increased === statValue ? 0.1 : 0) -
+                    (nature.decreased === statValue ? 0.1 : 0);
+                // const pokemonNature = pokemon["nature"];
+                // const nature =
+                //     1 +
+                //     (natures[pokemonNature - 1].increased === statValue
+                //         ? 0.1
+                //         : 0) -
+                //     (natures[pokemonNature - 1].decreased === statValue
+                //         ? 0.1
+                //         : 0);
                 return Math.floor(
                     (Math.floor(
                         ((2 * pokemon.stats[statValue]["base"] +
@@ -49,7 +57,7 @@ export const StatRow = ({
                         stages[pokemon.stats[statValue]["stage"] - 1][
                             versionOldOrNew
                         ] *
-                        nature
+                        natureMultiplier
                 );
             default:
                 if (pokemon.stats[statValue][stat] === -1) return "";

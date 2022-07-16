@@ -7,7 +7,7 @@ import { Type } from "components/type";
 import { Stats } from "components/stats";
 import { Moves } from "components/moves";
 import { Health } from "components/health";
-import { pkmnData, natures, statuses, itemData } from "data";
+import { pkmnData, natureLabels, statuses, itemData } from "data";
 import {
     FourColumnSpan,
     PokemonGrid,
@@ -44,7 +44,7 @@ export const Pokemon = ({
             <SelectorWrapper>
                 <Autocomplete
                     id={pokemon.nature}
-                    data={natures}
+                    data={natureLabels}
                     onChange={(id) => changeAttribute("nature", id)}
                 />
             </SelectorWrapper>
