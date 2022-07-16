@@ -11,7 +11,7 @@ import { pkmnData, natureLabels, statuses, itemData } from "data";
 import {
     FourColumnSpan,
     PokemonGrid,
-    SelectorWrapper,
+    ThreeColumnSpan,
     AttributeTitle,
     TwoColumnSpan,
     RemoveButton,
@@ -41,13 +41,13 @@ export const Pokemon = ({
                 <RemoveButton onClick={removePokemon}>Remove</RemoveButton>
             </TwoColumnSpan>
             <AttributeTitle>Nature:</AttributeTitle>
-            <SelectorWrapper>
+            <ThreeColumnSpan>
                 <Autocomplete
                     id={pokemon.nature}
                     data={natureLabels}
                     onChange={(id) => changeAttribute("nature", id)}
                 />
-            </SelectorWrapper>
+            </ThreeColumnSpan>
             <TwoColumnSpan>
                 Level:
                 <NumberEntry
@@ -58,34 +58,34 @@ export const Pokemon = ({
                 />
             </TwoColumnSpan>
             <AttributeTitle>Ability:</AttributeTitle>
-            <SelectorWrapper>
+            <ThreeColumnSpan>
                 <Autocomplete
                     id={pokemon.ability}
                     data={pokemon.abilities}
                     onChange={(id) => changeAttribute("ability", id)}
                 />
-            </SelectorWrapper>
+            </ThreeColumnSpan>
             {pokemon.hasOwnProperty("types") ? (
                 <Type pokemon={pokemon} />
             ) : (
                 <></>
             )}
             <AttributeTitle>Item:</AttributeTitle>
-            <SelectorWrapper>
+            <ThreeColumnSpan>
                 <Autocomplete
                     id={pokemon.item}
                     data={itemData}
                     onChange={(id) => changeAttribute("item", id)}
                 />
-            </SelectorWrapper>
+            </ThreeColumnSpan>
             <AttributeTitle>Status:</AttributeTitle>
-            <SelectorWrapper>
+            <ThreeColumnSpan>
                 <Autocomplete
                     id={pokemon.status}
                     data={statuses}
                     onChange={(id) => changeAttribute("status", id)}
                 />
-            </SelectorWrapper>
+            </ThreeColumnSpan>
             <Stats
                 pokemon={pokemon}
                 version={version}

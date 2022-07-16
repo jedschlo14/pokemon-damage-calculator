@@ -26,12 +26,10 @@ export const RemoveButton = styled(CenteredFlexbox)`
 
 export const FourColumnSpan = styled.div`
     grid-column: span 4;
-    text-transform: capitalize;
 `;
 
-export const SelectorWrapper = styled.div`
+export const ThreeColumnSpan = styled.div`
     grid-column: span 3;
-    text-transform: capitalize;
 `;
 
 export const TwoColumnSpan = styled(CenteredFlexbox)`
