@@ -9,7 +9,6 @@ export const StyledAutocomplete = styled(ReactSelect)`
         min-height: 0;
         background-color: ${({ theme }) => theme.button.default};
         height: ${({ header }) => (header ? "2.25rem" : "1.75rem")};
-        justify-content: center;
         width: ${({ centered }) => (centered ? "4rem" : "100%")};
     }
 

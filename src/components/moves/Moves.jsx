@@ -9,7 +9,7 @@ export const Moves = ({ pokemon, selectMove }) => {
     return (
         <Fragment>
             <MovesTitle>Moves:</MovesTitle>
-            {[...Array(4).keys()].map((_, index) => {
+            {[...Array(4).keys()].map((index) => {
                 return (
                     <MoveSelectorWrapper key={index}>
                         <Autocomplete
