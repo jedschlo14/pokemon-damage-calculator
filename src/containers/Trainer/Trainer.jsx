@@ -4,7 +4,7 @@ import { jsx } from "@emotion/react";
 import { useState } from "react";
 import { Team } from "./team/Team";
 import { Pokemon } from "./pokemon/Pokemon";
-import { TrainerHeader, TrainerWrapper } from "./Trainer.styles";
+import { ContainerWrapper, ContainerHeader } from "assets/styles/Common.styles";
 import { natureValues } from "data";
 import {
     formatAbilityName,
@@ -334,7 +334,6 @@ export const Trainer = ({ version }) => {
                 break;
             default:
         }
-
         setTeam(
             team.map((pokemon, index) =>
                 index === selectedIndex
@@ -366,8 +365,8 @@ export const Trainer = ({ version }) => {
     };
 
     return (
-        <TrainerWrapper>
-            <TrainerHeader>Team</TrainerHeader>
+        <ContainerWrapper width="34rem">
+            <ContainerHeader>Team</ContainerHeader>
             <Team
                 team={team}
                 selectedIndex={selectedIndex}
@@ -391,6 +390,6 @@ export const Trainer = ({ version }) => {
                     }
                 />
             ) : null}
-        </TrainerWrapper>
+        </ContainerWrapper>
     );
 };

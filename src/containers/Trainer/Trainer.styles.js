@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import { CenteredFlexbox } from "assets/styles/Common.styles";
 
 export const TrainerWrapper = styled.div`
-    flex-direction: column;
     width: 34rem;
     border-radius: 1rem;
     background-color: ${({ theme }) => theme.background.light};

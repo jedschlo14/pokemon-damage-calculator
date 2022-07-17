@@ -1,18 +1,14 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from "@emotion/react";
-import {
-    VersionSelectorHeader,
-    VersionSelectorItem,
-    VersionSelectorWrapper,
-    VersionsWrapper,
-} from "./VersionSelector.styles";
+import { ContainerWrapper, ContainerHeader } from "assets/styles/Common.styles";
+import { VersionSelectorItem, VersionsWrapper } from "./VersionSelector.styles";
 const versions = ["RBY", "GSC", "ADV", "DPP", "BW", "XY", "SM", "SS"];
 
 export const VersionSelector = ({ version, onChange }) => {
     return (
-        <VersionSelectorWrapper>
-            <VersionSelectorHeader>Select Version</VersionSelectorHeader>
+        <ContainerWrapper>
+            <ContainerHeader>Select Version</ContainerHeader>
             <VersionsWrapper>
                 {versions.map((name, index) => {
                     return (
@@ -27,6 +23,6 @@ export const VersionSelector = ({ version, onChange }) => {
                     );
                 })}
             </VersionsWrapper>
-        </VersionSelectorWrapper>
+        </ContainerWrapper>
     );
 };
