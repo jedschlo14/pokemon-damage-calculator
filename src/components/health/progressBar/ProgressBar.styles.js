@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 const ProgressBar = styled.div`
     height: 0.5rem;
-    border-radius: 0.25rem;
+    border-radius: 1rem;
 `;
 
 export const ProgressBarEmpty = styled(ProgressBar)`

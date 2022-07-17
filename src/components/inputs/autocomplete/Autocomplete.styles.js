@@ -2,6 +2,10 @@ import ReactSelect from "react-select";
 import styled from "@emotion/styled";
 
 export const StyledAutocomplete = styled(ReactSelect)`
+    & {
+        width: ${({ width }) => (width ? width : "100%")};
+    }
+
     .react-select__control {
         box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
         border-radius: 0.5rem;
@@ -9,7 +13,6 @@ export const StyledAutocomplete = styled(ReactSelect)`
         min-height: 0;
         background-color: ${({ theme }) => theme.button.default};
         height: ${({ header }) => (header ? "2.25rem" : "1.75rem")};
-        width: ${({ centered }) => (centered ? "4rem" : "100%")};
     }
 
     .react-select__control--is-focused {

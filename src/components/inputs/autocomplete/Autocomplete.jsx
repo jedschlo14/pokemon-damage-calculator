@@ -3,11 +3,19 @@
 import { jsx } from "@emotion/react";
 import { StyledAutocomplete } from "./Autocomplete.styles";
 
-export const Autocomplete = ({ id, data, onChange, centered, header }) => {
+export const Autocomplete = ({
+    id,
+    data,
+    onChange,
+    centered,
+    width,
+    header,
+}) => {
     return (
         <StyledAutocomplete
             header={header}
             centered={centered}
+            width={width}
             isSearchable={!centered}
             menuPlacement="auto"
             className="react-select-container"

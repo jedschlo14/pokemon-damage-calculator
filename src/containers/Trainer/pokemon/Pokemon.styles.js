@@ -34,7 +34,7 @@ export const ThreeColumnSpan = styled.div`
 
 export const TwoColumnSpan = styled(CenteredFlexbox)`
     grid-column: span 2;
-    gap: 0.5rem;
+    width: 100%;
 `;
 
 export const AttributeTitle = styled(CenteredFlexbox)`

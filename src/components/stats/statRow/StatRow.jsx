@@ -62,6 +62,7 @@ export const StatRow = ({ version, statLabel, stat, pokemon, changeStat }) => {
                 <CenteredFlexbox>
                     <Autocomplete
                         centered
+                        width="4rem"
                         id={pokemon.stats[stat].stage}
                         data={stages}
                         onChange={(id) => changeStat(id, stat, "stage")}
