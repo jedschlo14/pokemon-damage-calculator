@@ -36,15 +36,6 @@ export const StatRow = ({
                     1 +
                     (nature.increased === statValue ? 0.1 : 0) -
                     (nature.decreased === statValue ? 0.1 : 0);
-                // const pokemonNature = pokemon["nature"];
-                // const nature =
-                //     1 +
-                //     (natures[pokemonNature - 1].increased === statValue
-                //         ? 0.1
-                //         : 0) -
-                //     (natures[pokemonNature - 1].decreased === statValue
-                //         ? 0.1
-                //         : 0);
                 return Math.floor(
                     (Math.floor(
                         ((2 * pokemon.stats[statValue]["base"] +

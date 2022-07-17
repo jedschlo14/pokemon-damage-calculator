@@ -8,73 +8,94 @@ import { TrainerHeader, TrainerWrapper } from "./Trainer.styles";
 
 const maxId = 898;
 
+const basePokemon = {
+    sprite: "",
+    types: [],
+    level: 50,
+    nature: "bashful",
+    abilities: [],
+    ability: 1,
+    item: 0,
+    status: 1,
+    stats: {
+        hp: {
+            base: 0,
+            iv: 0,
+            ev: 0,
+            final: -1,
+            stage: 7,
+            current: -1,
+            currentPct: 100,
+        },
+        atk: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
+        def: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
+        spa: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
+        spd: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
+        spe: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
+    },
+    moves: [{}],
+    selectedMoves: [0, 0, 0, 0],
+};
+
 export const Trainer = ({ version }) => {
     const [team, setTeam] = useState([]);
-    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [selectedIndex, setSelectedIndex] = useState();
 
-    const createPokemon = (id, add) => {
-        const newPokemon = {
-            id: id,
-            sprite: "",
-            types: [],
-            level: 0,
-            nature: "bashful",
-            abilities: [],
-            ability: 1,
-            item: 0,
-            status: 1,
-            stats: {
-                hp: {
-                    base: 0,
-                    iv: 0,
-                    ev: 0,
-                    final: -1,
-                    stage: 7,
-                    current: -1,
-                    currentPct: 100,
-                },
-                atk: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
-                def: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
-                spa: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
-                spd: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
-                spe: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
-            },
-            moves: [{}],
-            selectedMoves: [0, 0, 0, 0],
-        };
-        fetch(`https://pokeapi.co/api/v2/pokemon/${newPokemon.id}`)
+    console.log(selectedIndex);
+
+    const createPokemon = (id, addNewPkmn) => {
+        fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
             .then((res) => res.json())
-            .then((pokeData) => {
-                newPokemon.name = pokeData.name;
-                newPokemon.level = 50;
-                // newPokemon.sprite = pokeData.sprites.front_default;
-                newPokemon.sprite =
-                    pokeData.sprites.other["official-artwork"].front_default;
-                newPokemon.types = pokeData.types.map((type) => type.type.name);
-                newPokemon.stats.hp.base = pokeData.stats[0].base_stat;
-                newPokemon.stats.atk.base = pokeData.stats[1].base_stat;
-                newPokemon.stats.def.base = pokeData.stats[2].base_stat;
-                newPokemon.stats.spa.base = pokeData.stats[3].base_stat;
-                newPokemon.stats.spd.base = pokeData.stats[4].base_stat;
-                newPokemon.stats.spe.base = pokeData.stats[5].base_stat;
-                newPokemon.weight = pokeData.weight;
-                newPokemon.abilities = pokeData.abilities.map(
-                    (ability, index) => {
+            .then((pkmn) => {
+                const newPokemon = {
+                    ...basePokemon,
+                    id,
+                    name: pkmn.name,
+                    sprite: pkmn.sprites.other["official-artwork"]
+                        .front_default,
+                    types: pkmn.types.map((type) => type.type.name),
+                    stats: {
+                        hp: {
+                            ...basePokemon.stats.hp,
+                            base: pkmn.stats[0].base_stat,
+                        },
+                        atk: {
+                            ...basePokemon.stats.atk,
+                            base: pkmn.stats[1].base_stat,
+                        },
+                        def: {
+                            ...basePokemon.stats.def,
+                            base: pkmn.stats[2].base_stat,
+                        },
+                        spa: {
+                            ...basePokemon.stats.spa,
+                            base: pkmn.stats[3].base_stat,
+                        },
+                        spd: {
+                            ...basePokemon.stats.spd,
+                            base: pkmn.stats[4].base_stat,
+                        },
+                        spe: {
+                            ...basePokemon.stats.spe,
+                            base: pkmn.stats[5].base_stat,
+                        },
+                    },
+                    weight: pkmn.weight,
+                    abilities: pkmn.abilities.map((ability, index) => {
                         return {
                             label: ability.ability.name,
                             value: index + 1,
                             info: ability.ability.url.split("/")[6],
                         };
-                    }
-                );
-                newPokemon.moves = pokeData.moves.map((move, index) => {
-                    return {
-                        label: move.move.name.split("-").join(" "),
-                        value: index + 1,
-                    };
-                });
-                // newPokemon.moves.unshift({ label: "", value: 0 });
-                if (add) setTeam([...team, newPokemon]);
+                    }),
+                    moves: pkmn.moves.map((move, index) => {
+                        return {
+                            label: move.move.name.split("-").join(" "),
+                            value: index + 1,
+                        };
+                    }),
+                };
+                if (addNewPkmn) setTeam([...team, newPokemon]);
                 else
                     setTeam(
                         team.map((pokemon, index) =>
@@ -82,18 +103,15 @@ export const Trainer = ({ version }) => {
                         )
                     );
             });
-        return newPokemon;
+        return basePokemon;
     };
 
     const addPokemon = (index) => {
         setSelectedIndex(index);
-        if (index === team.length) {
-            const newPokemon = createPokemon(
-                Math.floor(Math.random() * maxId) + 1,
-                true
-            );
-            setTeam([...team, newPokemon]);
-        }
+        setTeam([
+            ...team,
+            createPokemon(Math.floor(Math.random() * maxId) + 1, true),
+        ]);
     };
 
     const removePokemon = () => {

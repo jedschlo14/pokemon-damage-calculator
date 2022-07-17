@@ -92,11 +92,9 @@ var pkmnData = [];
 fetch("https://pokeapi.co/api/v2/pokemon?limit=10000")
     .then((res) => res.json())
     .then((data) => {
-        console.log(data.results);
         data.results.forEach((pkmn) => {
             if (parseInt(pkmn.url.split("/")[6]) < 10000)
                 pkmnData.push({
-                    // label: pkmn.name,
                     label: formatName(pkmn.name),
                     value: parseInt(pkmn.url.split("/")[6]),
                 });
