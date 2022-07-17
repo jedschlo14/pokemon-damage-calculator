@@ -43,8 +43,8 @@ export const Pokemon = ({
             <AttributeTitle>Form:</AttributeTitle>
             <ThreeColumnSpan>
                 <Autocomplete
-                    id={pokemon.id}
-                    data={pkmnData}
+                    id={pokemon.form}
+                    data={pokemon.forms}
                     onChange={(id) => selectPokemon(id)}
                 />
             </ThreeColumnSpan>

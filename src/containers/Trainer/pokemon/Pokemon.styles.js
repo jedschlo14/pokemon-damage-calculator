@@ -10,9 +10,8 @@ export const PokemonGrid = styled.div`
 `;
 
 export const RemoveButton = styled(CenteredFlexbox)`
-    // height: 100%;
-    height: 2.25rem;
-    width: 8rem;
+    height: 100%;
+    width: 10rem;
     border-radius: 0.5rem;
     color: ${({ theme }) => theme.typography.inverted};
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -34,7 +33,6 @@ export const ThreeColumnSpan = styled.div`
 
 export const TwoColumnSpan = styled(CenteredFlexbox)`
     grid-column: span 2;
-    width: 100%;
 `;
 
 export const AttributeTitle = styled(CenteredFlexbox)`

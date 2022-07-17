@@ -6,11 +6,17 @@ import { Team } from "./team/Team";
 import { Pokemon } from "./pokemon/Pokemon";
 import { TrainerHeader, TrainerWrapper } from "./Trainer.styles";
 import { natureValues } from "data";
+import {
+    formatAbilityName,
+    formatFormName,
+    formatMoveName,
+} from "utilities/formatName";
 
 const maxId = 898;
 
 const basePokemon = {
     sprite: "",
+    forms: [],
     types: [],
     level: 50,
     nature: "bashful",
@@ -96,80 +102,14 @@ export const Trainer = ({ version }) => {
         );
     };
 
-    const formatAbilityName = (name) => {
-        switch (name) {
-            case "dragons-maw":
-                return "Dragon's Maw";
-            default:
-                return name
-                    .split("-")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(" ");
-        }
-    };
-
-    const formatMoveName = (name) => {
-        switch (name) {
-            case "double-edge":
-                return "Double-Edge";
-            case "self-destruct":
-                return "Self-Destruct";
-            case "lock-on":
-                return "Lock-On";
-            case "will-o-wisp":
-                return "Will-O-Wisp";
-            case "u-turn":
-                return "U-Turn";
-            case "x-scissor":
-                return "X-Scissor";
-            case "v-create":
-                return "V-create";
-            case "trick-or-treat":
-                return "Trick-or-Treat";
-            case "forests-curse":
-                return "Forest's Curse";
-            case "freeze-dry":
-                return "Freeze-Dry";
-            case "topsy-turvy":
-                return "Topsy-Turvy";
-            case "kings-shield":
-                return "King's Shield";
-            case "baby-doll-eyes":
-                return "Baby-Doll Eyes";
-            case "power-up-punch":
-                return "Power-Up Punch";
-            case "lands-wrath":
-                return "Land's Wrath";
-            case "all-out-pummeling":
-                return "All-Out Pummeling";
-            case "never-ending-nightmare":
-                return "Never-Ending Nightmare";
-            case "soul-stealing-7-star-strike":
-                return "Soul-Stealing 7-Star Strike";
-            case "natures-madness":
-                return "Nature's Madness";
-            case "multi-attack":
-                return "Multi-Attack";
-            case "10000000-volt-thunderbolt":
-                return "10,000,000 Volt Thunderbolt";
-            case "lets-snuggle-forever":
-                return "Let's Snuggle Forever";
-            default:
-                return name
-                    .split("-")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(" ");
-        }
-    };
-
     const createPokemon = (id, addNewPkmn) => {
         fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
             .then((res) => res.json())
             .then((pkmn) => {
-                const newPokemon = {
+                const newPokemonWithoutForms = {
                     ...basePokemon,
                     id,
-                    name: pkmn.name,
+                    form: id,
                     sprite: pkmn.sprites.other["official-artwork"]
                         .front_default,
                     types: pkmn.types.map((type) => type.type.name),
@@ -241,11 +181,13 @@ export const Trainer = ({ version }) => {
                         },
                     },
                     weight: pkmn.weight,
-                    ability: pkmn.abilities[0].ability.url.split("/")[6],
+                    ability: parseInt(
+                        pkmn.abilities[0].ability.url.split("/")[6]
+                    ),
                     abilities: pkmn.abilities.map((ability) => {
                         return {
                             label: formatAbilityName(ability.ability.name),
-                            value: ability.ability.url.split("/")[6],
+                            value: parseInt(ability.ability.url.split("/")[6]),
                         };
                     }),
                     moves: [
@@ -253,18 +195,38 @@ export const Trainer = ({ version }) => {
                         ...pkmn.moves.map((move) => {
                             return {
                                 label: formatMoveName(move.move.name),
-                                value: move.move.url.split("/")[6],
+                                value: parseInt(move.move.url.split("/")[6]),
                             };
                         }),
                     ],
                 };
-                if (addNewPkmn) setTeam([...team, newPokemon]);
-                else
-                    setTeam(
-                        team.map((pokemon, index) =>
-                            index === selectedIndex ? newPokemon : pokemon
-                        )
-                    );
+                fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
+                    .then((res) => res.json())
+                    .then((pkmnVarieties) => {
+                        const newPokemon = {
+                            ...newPokemonWithoutForms,
+                            forms: pkmnVarieties.varieties.map((variety) => {
+                                return {
+                                    label: formatFormName(
+                                        pkmn.species.name,
+                                        variety.pokemon.name
+                                    ),
+                                    value: parseInt(
+                                        variety.pokemon.url.split("/")[6]
+                                    ),
+                                };
+                            }),
+                        };
+                        if (addNewPkmn) setTeam([...team, newPokemon]);
+                        else
+                            setTeam(
+                                team.map((pokemon, index) =>
+                                    index === selectedIndex
+                                        ? newPokemon
+                                        : pokemon
+                                )
+                            );
+                    });
             });
         return basePokemon;
     };
