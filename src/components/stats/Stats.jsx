@@ -21,7 +21,7 @@ export const Stats = ({ pokemon, version, changeStat }) => {
                         key={index}
                         version={version}
                         statLabel={stat.label}
-                        statValue={stat.value}
+                        stat={stat.value}
                         pokemon={pokemon}
                         changeStat={(value, stat, type) =>
                             changeStat(value, stat, type)

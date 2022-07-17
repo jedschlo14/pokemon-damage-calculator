@@ -4,7 +4,6 @@ import { jsx } from "@emotion/react";
 import { StyledAutocomplete } from "./Autocomplete.styles";
 
 export const Autocomplete = ({ id, data, onChange, centered, header }) => {
-    // console.log(id, data, data[id]);
     return (
         <StyledAutocomplete
             header={header}

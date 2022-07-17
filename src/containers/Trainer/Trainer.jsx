@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Team } from "./team/Team";
 import { Pokemon } from "./pokemon/Pokemon";
 import { TrainerHeader, TrainerWrapper } from "./Trainer.styles";
+import { natureValues } from "data";
 
 const maxId = 898;
 
@@ -19,19 +20,60 @@ const basePokemon = {
     status: 1,
     stats: {
         hp: {
+            unchangedBase: 0,
             base: 0,
             iv: 0,
             ev: 0,
-            final: -1,
+            final: 0,
             stage: 7,
-            current: -1,
+            current: 0,
             currentPct: 100,
+            calculateFinal: true,
         },
-        atk: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
-        def: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
-        spa: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
-        spd: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
-        spe: { base: 0, iv: 0, ev: 0, final: -1, stage: 7 },
+        atk: {
+            unchangedBase: 0,
+            base: 0,
+            iv: 0,
+            ev: 0,
+            final: 0,
+            stage: 7,
+            calculateFinal: true,
+        },
+        def: {
+            unchangedBase: 0,
+            base: 0,
+            iv: 0,
+            ev: 0,
+            final: 0,
+            stage: 7,
+            calculateFinal: true,
+        },
+        spa: {
+            unchangedBase: 0,
+            base: 0,
+            iv: 0,
+            ev: 0,
+            final: 0,
+            stage: 7,
+            calculateFinal: true,
+        },
+        spd: {
+            unchangedBase: 0,
+            base: 0,
+            iv: 0,
+            ev: 0,
+            final: 0,
+            stage: 7,
+            calculateFinal: true,
+        },
+        spe: {
+            base: 0,
+            iv: 0,
+            ev: 0,
+            final: 0,
+            stage: 7,
+            calculateFinal: true,
+        },
     },
     moves: [{}],
     selectedMoves: [0, 0, 0, 0],
@@ -41,7 +83,18 @@ export const Trainer = ({ version }) => {
     const [team, setTeam] = useState([]);
     const [selectedIndex, setSelectedIndex] = useState();
 
-    console.log(selectedIndex);
+    const calculateStat = (stat, statObj, level) => {
+        const bonus = stat === "hp" ? level + 10 : 5;
+        const baseAndIv =
+            version < 2
+                ? 2 * (statObj.base + statObj.iv)
+                : 2 * statObj.base + statObj.iv;
+        return (
+            Math.floor(
+                ((baseAndIv + Math.floor(statObj.ev / 4)) * level) / 100
+            ) + bonus
+        );
+    };
 
     const createPokemon = (id, addNewPkmn) => {
         fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
@@ -57,27 +110,68 @@ export const Trainer = ({ version }) => {
                     stats: {
                         hp: {
                             ...basePokemon.stats.hp,
+                            unchangedBase: pkmn.stats[0].base_stat,
                             base: pkmn.stats[0].base_stat,
+                            final: calculateStat(
+                                "hp",
+                                { base: pkmn.stats[0].base_stat, iv: 0, ev: 0 },
+                                50
+                            ),
+                            current: calculateStat(
+                                "hp",
+                                { base: pkmn.stats[0].base_stat, iv: 0, ev: 0 },
+                                50
+                            ),
                         },
                         atk: {
                             ...basePokemon.stats.atk,
+                            unchangedBase: pkmn.stats[1].base_stat,
                             base: pkmn.stats[1].base_stat,
+                            final: calculateStat(
+                                "atk",
+                                { base: pkmn.stats[1].base_stat, iv: 0, ev: 0 },
+                                50
+                            ),
                         },
                         def: {
                             ...basePokemon.stats.def,
+                            unchangedBase: pkmn.stats[2].base_stat,
                             base: pkmn.stats[2].base_stat,
+                            final: calculateStat(
+                                "def",
+                                { base: pkmn.stats[2].base_stat, iv: 0, ev: 0 },
+                                50
+                            ),
                         },
                         spa: {
                             ...basePokemon.stats.spa,
+                            unchangedBase: pkmn.stats[3].base_stat,
                             base: pkmn.stats[3].base_stat,
+                            final: calculateStat(
+                                "spa",
+                                { base: pkmn.stats[3].base_stat, iv: 0, ev: 0 },
+                                50
+                            ),
                         },
                         spd: {
                             ...basePokemon.stats.spd,
+                            unchangedBase: pkmn.stats[4].base_stat,
                             base: pkmn.stats[4].base_stat,
+                            final: calculateStat(
+                                "spd",
+                                { base: pkmn.stats[4].base_stat, iv: 0, ev: 0 },
+                                50
+                            ),
                         },
                         spe: {
                             ...basePokemon.stats.spe,
+                            unchangedBase: pkmn.stats[5].base_stat,
                             base: pkmn.stats[5].base_stat,
+                            final: calculateStat(
+                                "spe",
+                                { base: pkmn.stats[5].base_stat, iv: 0, ev: 0 },
+                                50
+                            ),
                         },
                     },
                     weight: pkmn.weight,
@@ -133,76 +227,81 @@ export const Trainer = ({ version }) => {
         );
     };
 
-    const changeStat = (value, stat, type) => {
-        var statObj = { ...team[selectedIndex].stats[stat] };
-        if (type === "stage") statObj.stage = value;
-        else if (
-            type !== "final" &&
-            team[selectedIndex].stats[stat].final === -1
-        )
-            statObj[type] = value;
-        else if (type === "final") {
-            statObj.final = value;
-            statObj.iv = -1;
-            statObj.ev = -1;
-            statObj.stage = 7;
-        } else if (type === "iv") {
-            statObj.iv = value;
-            statObj.ev = 0;
-            statObj.final = -1;
-            if (stat === "hp") statObj.current = -1;
-        } else if (type === "ev") {
-            statObj.iv = 0;
-            statObj.ev = value;
-            statObj.final = -1;
-            if (stat === "hp") statObj.current = -1;
-        }
-        if (type === "current") {
-            statObj.current = value;
-            if (statObj.final === -1) {
-                const final =
-                    team[selectedIndex].stats.hp.final === -1
-                        ? Math.floor(
-                              ((2 * team[selectedIndex].stats.hp.base +
-                                  team[selectedIndex].stats.hp.iv +
-                                  Math.floor(
-                                      team[selectedIndex].stats.hp.ev / 4
-                                  )) *
-                                  team[selectedIndex].level) /
-                                  100
-                          ) +
-                          team[selectedIndex].level +
-                          10
-                        : team[selectedIndex].stats.hp.final;
-                statObj.currentPct = Math.floor(
-                    (statObj.current / final) * 100
+    const changeStat = (pokemon, value, stat, type) => {
+        var statObj = { ...pokemon.stats[stat] };
+        switch (type) {
+            case "stage":
+                statObj.stage = value;
+                break;
+            case "base":
+                statObj.base = value;
+                if (!statObj.calculateFinal) {
+                    statObj.iv = 0;
+                    statObj.ev = 0;
+                }
+                statObj.calculateFinal = true;
+                statObj.final = calculateStat(stat, statObj, pokemon.level);
+                if (stat === "hp")
+                    statObj.current = calculateStat(
+                        stat,
+                        statObj,
+                        pokemon.level
+                    );
+                break;
+            case "iv":
+                statObj.iv = value;
+                if (!statObj.calculateFinal) {
+                    statObj.ev = 0;
+                    statObj.base = statObj.unchangedBase;
+                }
+                statObj.calculateFinal = true;
+                statObj.final = calculateStat(stat, statObj, pokemon.level);
+                if (stat === "hp")
+                    statObj.current = calculateStat(
+                        stat,
+                        statObj,
+                        pokemon.level
+                    );
+                break;
+            case "ev":
+                statObj.ev = value;
+                if (!statObj.calculateFinal) {
+                    statObj.iv = 0;
+                    statObj.base = statObj.unchangedBase;
+                }
+                statObj.calculateFinal = true;
+                statObj.final = calculateStat(stat, statObj, pokemon.level);
+                if (stat === "hp")
+                    statObj.current = calculateStat(
+                        stat,
+                        statObj,
+                        pokemon.level
+                    );
+                break;
+            case "final":
+                const nature = natureValues[pokemon.nature];
+                const natureMultiplier =
+                    1 +
+                    (nature.increased === stat ? 0.1 : 0) -
+                    (nature.decreased === stat ? 0.1 : 0);
+                statObj.final = value / natureMultiplier;
+                statObj.stage = 7;
+                statObj.calculateFinal = false;
+                if (stat === "hp") statObj.current = value / natureMultiplier;
+                break;
+            case "current":
+                statObj.current = value;
+                statObj.currentPct = +(
+                    Math.round(
+                        (statObj.current / statObj.final) * 100 + "e+2"
+                    ) + "e-2"
                 );
-            } else
-                statObj.currentPct = Math.floor(
-                    (statObj.current / statObj.final) * 100
-                );
-        } else if (type === "currentPct") {
-            statObj.currentPct = value;
-            if (statObj.final === -1) {
-                const final =
-                    team[selectedIndex].stats.hp.final === -1
-                        ? Math.floor(
-                              ((2 * team[selectedIndex].stats.hp.base +
-                                  team[selectedIndex].stats.hp.iv +
-                                  Math.floor(
-                                      team[selectedIndex].stats.hp.ev / 4
-                                  )) *
-                                  team[selectedIndex].level) /
-                                  100
-                          ) +
-                          team[selectedIndex].level +
-                          10
-                        : team[selectedIndex].stats.hp.final;
-                statObj.current = Math.floor((value * final) / 100);
-            } else statObj.current = Math.floor((value * statObj.final) / 100);
-        } else if (stat === "hp") {
-            statObj.current = statObj.final;
-            statObj.currentPct = 100;
+                break;
+            case "currentPct":
+                statObj.currentPct = value;
+                statObj.current = Math.floor((value * statObj.final) / 100);
+                break;
+            default:
         }
 
         setTeam(
@@ -254,7 +353,7 @@ export const Trainer = ({ version }) => {
                         changeAttribute(attribute, value)
                     }
                     changeStat={(value, stat, type) =>
-                        changeStat(value, stat, type)
+                        changeStat(team[selectedIndex], value, stat, type)
                     }
                     selectMove={(newMoveIndex, newMove) =>
                         selectMove(newMoveIndex, newMove)
