@@ -3,10 +3,10 @@
 import { jsx } from "@emotion/react";
 import { Autocomplete } from "components/inputs/autocomplete";
 import { NumberEntry } from "components/inputs/numberEntry";
-import { Type } from "components/type";
-import { Stats } from "components/stats";
-import { Moves } from "components/moves";
-import { Health } from "components/health";
+import { Type } from "containers/trainer/type";
+import { Stats } from "containers/trainer/stats";
+import { Moves } from "containers/trainer/moves";
+import { Health } from "containers/trainer/health";
 import { pkmnData, natureLabels, itemData } from "data";
 import {
     FourColumnSpan,

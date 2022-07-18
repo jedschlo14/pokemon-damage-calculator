@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from "@emotion/react";
-import { StatRow } from "components/stats/statRow";
+import { StatRow } from "containers/trainer/stats/statRow";
 import { stats } from "data";
 import { Fragment } from "react";
 import { StatTitle } from "./Stats.styles";
