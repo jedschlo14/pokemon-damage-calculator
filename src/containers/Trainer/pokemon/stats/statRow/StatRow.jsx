@@ -9,7 +9,7 @@ import { StatRowTitle } from "./StatRow.styles";
 import { Fragment } from "react";
 
 export const StatRow = ({
-    generation,
+    fieldStatus,
     statLabel,
     stat,
     pokemon,
@@ -17,7 +17,8 @@ export const StatRow = ({
 }) => {
     const displayStat = (type) => {
         if (type === "final") {
-            const generationOldOrNew = generation <= 2 ? "old" : "new";
+            const generationOldOrNew =
+                fieldStatus.generation <= 2 ? "old" : "new";
             const nature = natureValues[pokemon.nature];
             const natureMultiplier =
                 1 +
@@ -52,7 +53,7 @@ export const StatRow = ({
             <NumberEntry
                 value={displayStat("ev")}
                 min={0}
-                max={generation < 2 ? 65535 : 255}
+                max={fieldStatus.generation < 2 ? 65535 : 255}
                 onChange={(e) => changeStat(e, stat, "ev")}
             />
             <NumberEntry

@@ -1,11 +1,26 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from "@emotion/react";
+import { Selector } from "components/selector";
 
-export const BattleType = () => {
+export const BattleType = ({ fieldStatus, onChange }) => {
+    const battleTypes =
+        fieldStatus.generation >= 3
+            ? [
+                  { label: "Single", value: "single" },
+                  { label: "Double", value: "double" },
+              ]
+            : [];
+
     return (
-        <div>
-            <div>BattleType</div>
-        </div>
+        <Selector
+            contentType="text"
+            items={battleTypes}
+            onClick={onChange}
+            selectedIndex={fieldStatus.battleType}
+            width="4rem"
+            height="2rem"
+            borderRadius="0.5rem"
+        />
     );
 };

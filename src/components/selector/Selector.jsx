@@ -10,6 +10,7 @@ import {
 
 export const Selector = ({
     contentType,
+    useIndex,
     items,
     onClick,
     selectedIndex,
@@ -25,14 +26,16 @@ export const Selector = ({
                     width={width}
                     height={height}
                     borderRadius={borderRadius}
-                    key={index}
-                    selected={selectedIndex === index ? 1 : 0}
-                    onClick={() => onClick(index)}
+                    key={useIndex ? index : item.value}
+                    selected={selectedIndex === (useIndex ? index : item.value)}
+                    onClick={() => onClick(useIndex ? index : item.value)}
                 >
                     {contentType === "text" ? (
-                        <SelectorText>{item}</SelectorText>
+                        <SelectorText>
+                            {useIndex ? item : item.label}
+                        </SelectorText>
                     ) : (
-                        <SelectorImage src={item} />
+                        <SelectorImage src={useIndex ? item : item.src} />
                     )}
                 </SelectorItem>
             ))}

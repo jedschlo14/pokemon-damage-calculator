@@ -8,21 +8,26 @@ import { useState } from "react";
 import { LandingWrapper } from "./Landing.styles";
 
 export const Landing = () => {
-    const [generation, setGeneration] = useState(4);
-    const [fieldStatus, setFieldStatus] = useState();
+    const [fieldStatus, setFieldStatus] = useState({
+        generation: 4,
+        battleType: "single",
+    });
+
+    console.log(fieldStatus);
 
     return (
         <LandingWrapper>
             <GenerationSelector
-                generation={generation - 1}
-                onChange={(generation) => setGeneration(generation + 1)}
+                generation={fieldStatus.generation}
+                onChange={(generation) =>
+                    setFieldStatus({ ...fieldStatus, generation })
+                }
             />
             <Battlefield
-                generation={generation}
                 fieldStatus={fieldStatus}
                 onChange={(fieldStatus) => setFieldStatus(fieldStatus)}
             />
-            <Trainer generation={generation} />
+            <Trainer fieldStatus={fieldStatus} />
         </LandingWrapper>
     );
 };

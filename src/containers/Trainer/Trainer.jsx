@@ -7,7 +7,7 @@ import Plus from "assets/img/plus.png";
 import { ContainerWrapper, ContainerHeader } from "assets/styles/Common.styles";
 import { useTrainer } from "./useTrainer";
 
-export const Trainer = ({ generation }) => {
+export const Trainer = ({ fieldStatus }) => {
     const {
         team,
         selectedIndex,
@@ -17,13 +17,14 @@ export const Trainer = ({ generation }) => {
         changeAttribute,
         changeStat,
         selectMove,
-    } = useTrainer(generation);
+    } = useTrainer(fieldStatus);
 
     return (
         <ContainerWrapper width="34rem">
             <ContainerHeader>Team</ContainerHeader>
             <Selector
                 contentType="image"
+                useIndex
                 items={
                     team.length === 6
                         ? team.map((pkmn) => pkmn.sprite)
@@ -39,7 +40,7 @@ export const Trainer = ({ generation }) => {
             {team.length > 0 ? (
                 <Pokemon
                     pokemon={team[selectedIndex]}
-                    generation={generation}
+                    fieldStatus={fieldStatus}
                     selectPokemon={(id) => createPokemon(id, false)}
                     removePokemon={() => removePokemon()}
                     changeAttribute={(attribute, value) =>

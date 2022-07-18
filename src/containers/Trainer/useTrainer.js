@@ -78,7 +78,7 @@ const basePokemon = {
     selectedMoves: [0, 0, 0, 0],
 };
 
-export const useTrainer = (generation) => {
+export const useTrainer = (fieldStatus) => {
     const [team, setTeam] = useState([]);
     const [selectedIndex, setSelectedIndex] = useState();
 
@@ -94,7 +94,7 @@ export const useTrainer = (generation) => {
     const calculateStat = (stat, statObj, level) => {
         const bonus = stat === "hp" ? level + 10 : 5;
         const baseAndIv =
-            generation <= 2
+            fieldStatus.generation <= 2
                 ? 2 * (statObj.base + statObj.iv)
                 : 2 * statObj.base + statObj.iv;
         return (

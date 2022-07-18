@@ -8,14 +8,19 @@ import { Terrain } from "./Terrain";
 import { UserStatus } from "./UserStatus";
 import { Weather } from "./Weather";
 
-export const Battlefield = ({ generation, fieldStatus, onChange }) => {
+export const Battlefield = ({ fieldStatus, onChange }) => {
     return (
         <ContainerWrapper>
             <ContainerHeader>Battlefield</ContainerHeader>
-            {generation >= 3 ? <BattleType /> : null}
-            {generation >= 6 ? <Terrain /> : null}
-            {generation >= 2 ? <Weather /> : null}
-            {generation >= 4 ? <SharedStatus /> : null}
+            <BattleType
+                fieldStatus={fieldStatus}
+                onChange={(battleType) =>
+                    onChange({ ...fieldStatus, battleType })
+                }
+            />
+            <Terrain />
+            <Weather />
+            <SharedStatus />
             <UserStatus />
         </ContainerWrapper>
     );
