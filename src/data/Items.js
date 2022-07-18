@@ -26,11 +26,11 @@ const formatName = (name) => {
 };
 
 var itemData = [{ label: "None", value: 0 }];
-categories.forEach((category) => {
+for (const category of categories) {
     fetch(`https://pokeapi.co/api/v2/item-category/${category}`)
         .then((res) => res.json())
         .then((data) => {
-            data.items.forEach((item) => {
+            for (const item of data.items) {
                 itemData.push({
                     label:
                         category === "z-crystals"
@@ -38,8 +38,8 @@ categories.forEach((category) => {
                             : formatName(item.name),
                     value: parseInt(item.url.split("/")[6]),
                 });
-            });
+            }
         });
-});
+}
 
 export { itemData };

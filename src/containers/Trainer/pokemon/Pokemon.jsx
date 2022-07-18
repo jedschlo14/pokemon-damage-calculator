@@ -26,7 +26,6 @@ export const Pokemon = ({
     changeStat,
     selectMove,
 }) => {
-    console.log(pokemon);
     return (
         <PokemonGrid>
             <FourColumnSpan>

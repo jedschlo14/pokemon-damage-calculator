@@ -17,7 +17,7 @@ export const Trainer = ({ generation }) => {
         changeAttribute,
         changeStat,
         selectMove,
-    } = useTrainer({ generation });
+    } = useTrainer(generation);
 
     return (
         <ContainerWrapper width="34rem">

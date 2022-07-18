@@ -78,7 +78,7 @@ const basePokemon = {
     selectedMoves: [0, 0, 0, 0],
 };
 
-export const useTrainer = ({ generation }) => {
+export const useTrainer = (generation) => {
     const [team, setTeam] = useState([]);
     const [selectedIndex, setSelectedIndex] = useState();
 
