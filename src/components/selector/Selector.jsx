@@ -20,14 +20,16 @@ export const Selector = ({
     alignment,
 }) => {
     return (
-        <SelectorWrapper alignment={alignment}>
+        <SelectorWrapper alignment={alignment} hasItems={items.length !== 0}>
             {items.map((item, index) => (
                 <SelectorItem
                     width={width}
                     height={height}
                     borderRadius={borderRadius}
                     key={useIndex ? index : item.value}
-                    selected={selectedIndex === (useIndex ? index : item.value)}
+                    isSelected={
+                        selectedIndex === (useIndex ? index : item.value)
+                    }
                     onClick={() => onClick(useIndex ? index : item.value)}
                 >
                     {contentType === "text" ? (

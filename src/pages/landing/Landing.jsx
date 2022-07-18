@@ -11,6 +11,9 @@ export const Landing = () => {
     const [fieldStatus, setFieldStatus] = useState({
         generation: 4,
         battleType: "single",
+        terrain: "default",
+        weather: "none",
+        gravity: true,
     });
 
     console.log(fieldStatus);

@@ -1,11 +1,17 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from "@emotion/react";
+import { Toggle } from "components/toggle";
 
-export const SharedStatus = () => {
+export const SharedStatus = ({ fieldStatus, onChange }) => {
     return (
-        <div>
-            <div>SharedStatus</div>
-        </div>
+        <Toggle
+            item={"Gravity"}
+            isSelected={fieldStatus.gravity}
+            toggle={onChange}
+            width="4rem"
+            height="2rem"
+            borderRadius="0.5rem"
+        />
     );
 };

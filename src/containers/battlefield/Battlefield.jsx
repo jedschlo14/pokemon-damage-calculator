@@ -18,9 +18,18 @@ export const Battlefield = ({ fieldStatus, onChange }) => {
                     onChange({ ...fieldStatus, battleType })
                 }
             />
-            <Terrain />
-            <Weather />
-            <SharedStatus />
+            <Terrain
+                fieldStatus={fieldStatus}
+                onChange={(terrain) => onChange({ ...fieldStatus, terrain })}
+            />
+            <Weather
+                fieldStatus={fieldStatus}
+                onChange={(weather) => onChange({ ...fieldStatus, weather })}
+            />
+            <SharedStatus
+                fieldStatus={fieldStatus}
+                onChange={(gravity) => onChange({ ...fieldStatus, gravity })}
+            />
             <UserStatus />
         </ContainerWrapper>
     );

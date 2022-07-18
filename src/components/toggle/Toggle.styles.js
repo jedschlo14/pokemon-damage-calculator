@@ -1,8 +1,6 @@
 import styled from "@emotion/styled";
 import { CenteredFlexbox } from "assets/styles/Common.styles";
 export const SelectorWrapper = styled(CenteredFlexbox)`
-    justify-content: ${({ alignment }) => alignment};
-    padding: ${({ hasItems }) => (hasItems ? "1rem" : 0)};
     gap: 1rem;
 `;
 
@@ -22,7 +20,7 @@ export const SelectorItem = styled(CenteredFlexbox)`
     &:hover {
         background-color: ${({ isSelected, theme }) =>
             isSelected ? theme.button.selected : theme.button.hover};
-        cursor: ${({ isSelected }) => (isSelected ? "default" : "pointer")};
+        cursor: pointer;
     }
 `;
 
