@@ -31,7 +31,7 @@ export const Trainer = ({ fieldStatus }) => {
                         : [...team.map((pkmn) => pkmn.sprite), Plus]
                 }
                 onClick={(index) => handleSelector(index)}
-                selectedIndex={selectedIndex}
+                selected={selectedIndex}
                 width="4rem"
                 height="4rem"
                 borderRadius="1rem"

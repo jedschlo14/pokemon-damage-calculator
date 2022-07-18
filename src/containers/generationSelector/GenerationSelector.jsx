@@ -23,7 +23,7 @@ export const GenerationSelector = ({ generation, onChange }) => {
                 contentType="text"
                 items={generations}
                 onClick={onChange}
-                selectedIndex={generation}
+                selected={generation}
                 width="4rem"
                 height="2rem"
                 borderRadius="0.5rem"

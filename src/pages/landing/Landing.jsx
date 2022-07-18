@@ -13,7 +13,8 @@ export const Landing = () => {
         battleType: "single",
         terrain: "default",
         weather: "none",
-        gravity: true,
+        sharedStatus: [],
+        userStatus: [],
     });
 
     console.log(fieldStatus);
@@ -30,6 +31,7 @@ export const Landing = () => {
                 fieldStatus={fieldStatus}
                 onChange={(fieldStatus) => setFieldStatus(fieldStatus)}
             />
+            <Trainer fieldStatus={fieldStatus} />
             <Trainer fieldStatus={fieldStatus} />
         </LandingWrapper>
     );

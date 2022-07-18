@@ -22,7 +22,8 @@ export const SelectorItem = styled(CenteredFlexbox)`
     &:hover {
         background-color: ${({ isSelected, theme }) =>
             isSelected ? theme.button.selected : theme.button.hover};
-        cursor: ${({ isSelected }) => (isSelected ? "default" : "pointer")};
+        cursor: ${({ multi, isSelected }) =>
+            multi ? "pointer" : isSelected ? "default" : "pointer"};
     }
 `;
 

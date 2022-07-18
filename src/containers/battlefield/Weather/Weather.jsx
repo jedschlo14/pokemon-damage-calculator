@@ -28,7 +28,7 @@ export const Weather = ({ fieldStatus, onChange }) => {
             contentType="text"
             items={weather}
             onClick={onChange}
-            selectedIndex={fieldStatus.weather}
+            selected={fieldStatus.weather}
             width="4rem"
             height="2rem"
             borderRadius="0.5rem"

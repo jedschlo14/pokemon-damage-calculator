@@ -28,9 +28,22 @@ export const Battlefield = ({ fieldStatus, onChange }) => {
             />
             <SharedStatus
                 fieldStatus={fieldStatus}
-                onChange={(gravity) => onChange({ ...fieldStatus, gravity })}
+                onChange={(sharedStatus) =>
+                    onChange({ ...fieldStatus, sharedStatus })
+                }
             />
-            <UserStatus />
+            <UserStatus
+                fieldStatus={fieldStatus}
+                onChange={(userStatus) =>
+                    onChange({ ...fieldStatus, userStatus })
+                }
+            />
+            <UserStatus
+                fieldStatus={fieldStatus}
+                onChange={(opponentStatus) =>
+                    onChange({ ...fieldStatus, opponentStatus })
+                }
+            />
         </ContainerWrapper>
     );
 };

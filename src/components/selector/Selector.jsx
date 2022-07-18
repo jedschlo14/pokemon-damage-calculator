@@ -8,16 +8,24 @@ import {
     SelectorImage,
 } from "./Selector.styles";
 
+const toggleArrayElement = (array, value) => {
+    const index = array.indexOf(value);
+    return index === -1
+        ? [...array, value]
+        : array.filter((item) => item !== value);
+};
+
 export const Selector = ({
     contentType,
-    useIndex,
     items,
     onClick,
-    selectedIndex,
+    selected,
     width,
     height,
     borderRadius,
     alignment,
+    useIndex,
+    multi,
 }) => {
     return (
         <SelectorWrapper alignment={alignment} hasItems={items.length !== 0}>
@@ -26,11 +34,25 @@ export const Selector = ({
                     width={width}
                     height={height}
                     borderRadius={borderRadius}
-                    key={useIndex ? index : item.value}
+                    multi={multi}
+                    key={index}
                     isSelected={
-                        selectedIndex === (useIndex ? index : item.value)
+                        multi
+                            ? selected.includes(useIndex ? index : item.value)
+                            : selected === (useIndex ? index : item.value)
                     }
-                    onClick={() => onClick(useIndex ? index : item.value)}
+                    onClick={() =>
+                        onClick(
+                            multi
+                                ? toggleArrayElement(
+                                      selected,
+                                      useIndex ? index : item.value
+                                  )
+                                : useIndex
+                                ? index
+                                : item.value
+                        )
+                    }
                 >
                     {contentType === "text" ? (
                         <SelectorText>

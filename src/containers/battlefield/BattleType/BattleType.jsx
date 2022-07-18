@@ -17,7 +17,7 @@ export const BattleType = ({ fieldStatus, onChange }) => {
             contentType="text"
             items={battleTypes}
             onClick={onChange}
-            selectedIndex={fieldStatus.battleType}
+            selected={fieldStatus.battleType}
             width="4rem"
             height="2rem"
             borderRadius="0.5rem"
