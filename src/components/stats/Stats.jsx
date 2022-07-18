@@ -6,21 +6,20 @@ import { stats } from "data";
 import { Fragment } from "react";
 import { StatTitle } from "./Stats.styles";
 
-export const Stats = ({ pokemon, version, changeStat }) => {
-    console.log(version);
+export const Stats = ({ pokemon, generation, changeStat }) => {
     return (
         <Fragment>
             <div></div>
             <StatTitle>Base</StatTitle>
-            <StatTitle>{version <= 2 ? "DVs" : "IVs"}</StatTitle>
-            <StatTitle>{version <= 2 ? "statEXP" : "EVs"}</StatTitle>
+            <StatTitle>{generation <= 2 ? "DVs" : "IVs"}</StatTitle>
+            <StatTitle>{generation <= 2 ? "statEXP" : "EVs"}</StatTitle>
             <StatTitle>Final</StatTitle>
             <StatTitle>Stage</StatTitle>
             {stats.map((stat, index) => {
                 return (
                     <StatRow
                         key={index}
-                        version={version}
+                        generation={generation}
                         statLabel={stat.label}
                         stat={stat.value}
                         pokemon={pokemon}

@@ -19,7 +19,7 @@ import {
 
 export const Pokemon = ({
     pokemon,
-    version,
+    generation,
     selectPokemon,
     removePokemon,
     changeAttribute,
@@ -88,7 +88,7 @@ export const Pokemon = ({
             </ThreeColumnSpan>
             <Stats
                 pokemon={pokemon}
-                version={version}
+                generation={generation}
                 changeStat={(value, stat, type) =>
                     changeStat(value, stat, type)
                 }

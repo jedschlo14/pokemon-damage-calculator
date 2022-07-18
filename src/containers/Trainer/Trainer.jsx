@@ -2,8 +2,9 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/react";
 import { useState } from "react";
-import { Team } from "./team/Team";
 import { Pokemon } from "./pokemon/Pokemon";
+import { Selector } from "components/selector";
+import Plus from "assets/img/plus.png";
 import { ContainerWrapper, ContainerHeader } from "assets/styles/Common.styles";
 import { natureValues } from "data";
 import {
@@ -85,14 +86,23 @@ const basePokemon = {
     selectedMoves: [0, 0, 0, 0],
 };
 
-export const Trainer = ({ version }) => {
+export const Trainer = ({ generation }) => {
     const [team, setTeam] = useState([]);
     const [selectedIndex, setSelectedIndex] = useState();
+
+    const handleSelector = (index) => {
+        setSelectedIndex(index);
+        if (index === team.length)
+            setTeam([
+                ...team,
+                createPokemon(Math.floor(Math.random() * maxId) + 1, true),
+            ]);
+    };
 
     const calculateStat = (stat, statObj, level) => {
         const bonus = stat === "hp" ? level + 10 : 5;
         const baseAndIv =
-            version <= 2
+            generation <= 2
                 ? 2 * (statObj.base + statObj.iv)
                 : 2 * statObj.base + statObj.iv;
         return (
@@ -231,14 +241,6 @@ export const Trainer = ({ version }) => {
         return basePokemon;
     };
 
-    const addPokemon = (index) => {
-        setSelectedIndex(index);
-        setTeam([
-            ...team,
-            createPokemon(Math.floor(Math.random() * maxId) + 1, true),
-        ]);
-    };
-
     const removePokemon = () => {
         const maxIndex = team.length - 1;
         setTeam(team.filter((_, index) => index !== selectedIndex));
@@ -367,16 +369,24 @@ export const Trainer = ({ version }) => {
     return (
         <ContainerWrapper width="34rem">
             <ContainerHeader>Team</ContainerHeader>
-            <Team
-                team={team}
+            <Selector
+                contentType="image"
+                items={
+                    team.length === 6
+                        ? team.map((pkmn) => pkmn.sprite)
+                        : [...team.map((pkmn) => pkmn.sprite), Plus]
+                }
+                onClick={(index) => handleSelector(index)}
                 selectedIndex={selectedIndex}
-                addPokemon={(index) => addPokemon(index)}
-                selectIndex={(index) => setSelectedIndex(index)}
+                width="4rem"
+                height="4rem"
+                borderRadius="1rem"
+                alignment="left"
             />
             {team.length > 0 ? (
                 <Pokemon
                     pokemon={team[selectedIndex]}
-                    version={version}
+                    generation={generation}
                     selectPokemon={(id) => createPokemon(id, false)}
                     removePokemon={() => removePokemon()}
                     changeAttribute={(attribute, value) =>

@@ -5,13 +5,10 @@ import { Trainer } from "containers/trainer";
 import { GenerationSelector } from "containers/generationSelector";
 import { Battlefield } from "containers/battlefield";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 import { LandingWrapper } from "./Landing.styles";
 
 export const Landing = () => {
-    const [generation, setGeneration] = useState(
-        parseInt(useParams().generation)
-    );
+    const [generation, setGeneration] = useState(4);
     const [fieldStatus, setFieldStatus] = useState();
 
     return (

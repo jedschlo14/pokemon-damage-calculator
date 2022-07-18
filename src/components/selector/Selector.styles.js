@@ -1,20 +1,15 @@
 import styled from "@emotion/styled";
 import { CenteredFlexbox } from "assets/styles/Common.styles";
-import { Link } from "react-router-dom";
-
-export const GenerationWrapper = styled(CenteredFlexbox)`
+export const SelectorWrapper = styled(CenteredFlexbox)`
+    justify-content: ${({ alignment }) => alignment};
     gap: 1rem;
     padding: 1rem;
-    font-weight: 700;
 `;
 
-export const GenerationSelectorItem = styled(Link)`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 4rem;
-    height: 2rem;
-    border-radius: 0.5rem;
+export const SelectorItem = styled(CenteredFlexbox)`
+    width: ${({ width }) => width};
+    height: ${({ height }) => height};
+    border-radius: ${({ borderRadius }) => borderRadius};
     padding: 0.25rem;
     transition-duration: 200ms;
     transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
@@ -29,6 +24,13 @@ export const GenerationSelectorItem = styled(Link)`
             selected ? theme.button.selected : theme.button.hover};
         cursor: ${({ selected }) => (selected ? "default" : "pointer")};
     }
-    text-decoration: none;
-    color: inherit;
+`;
+
+export const SelectorText = styled.div`
+    font-weight: 700;
+`;
+
+export const SelectorImage = styled.img`
+    width: 100%;
+    height: 100%;
 `;

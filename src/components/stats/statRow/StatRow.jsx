@@ -8,10 +8,16 @@ import { stages, natureValues } from "data";
 import { StatRowTitle } from "./StatRow.styles";
 import { Fragment } from "react";
 
-export const StatRow = ({ version, statLabel, stat, pokemon, changeStat }) => {
+export const StatRow = ({
+    generation,
+    statLabel,
+    stat,
+    pokemon,
+    changeStat,
+}) => {
     const displayStat = (type) => {
         if (type === "final") {
-            const versionOldOrNew = version <= 2 ? "old" : "new";
+            const generationOldOrNew = generation <= 2 ? "old" : "new";
             const nature = natureValues[pokemon.nature];
             const natureMultiplier =
                 1 +
@@ -19,7 +25,7 @@ export const StatRow = ({ version, statLabel, stat, pokemon, changeStat }) => {
                 (nature.decreased === stat ? 0.1 : 0);
             return Math.floor(
                 pokemon.stats[stat].final *
-                    stages[pokemon.stats[stat].stage - 1][versionOldOrNew] *
+                    stages[pokemon.stats[stat].stage - 1][generationOldOrNew] *
                     natureMultiplier
             );
         }
@@ -46,7 +52,7 @@ export const StatRow = ({ version, statLabel, stat, pokemon, changeStat }) => {
             <NumberEntry
                 value={displayStat("ev")}
                 min={0}
-                max={version < 2 ? 65535 : 255}
+                max={generation < 2 ? 65535 : 255}
                 onChange={(e) => changeStat(e, stat, "ev")}
             />
             <NumberEntry
