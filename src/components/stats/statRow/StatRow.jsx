@@ -11,7 +11,7 @@ import { Fragment } from "react";
 export const StatRow = ({ version, statLabel, stat, pokemon, changeStat }) => {
     const displayStat = (type) => {
         if (type === "final") {
-            const versionOldOrNew = version < 2 ? "old" : "new";
+            const versionOldOrNew = version <= 2 ? "old" : "new";
             const nature = natureValues[pokemon.nature];
             const natureMultiplier =
                 1 +

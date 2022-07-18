@@ -2,13 +2,13 @@ import styled from "@emotion/styled";
 import { CenteredFlexbox } from "assets/styles/Common.styles";
 import { Link } from "react-router-dom";
 
-export const VersionsWrapper = styled(CenteredFlexbox)`
+export const GenerationWrapper = styled(CenteredFlexbox)`
     gap: 1rem;
     padding: 1rem;
     font-weight: 700;
 `;
 
-export const VersionSelectorItem = styled(Link)`
+export const GenerationSelectorItem = styled(Link)`
     display: flex;
     align-items: center;
     justify-content: center;

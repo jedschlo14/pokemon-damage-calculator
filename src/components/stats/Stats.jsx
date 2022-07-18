@@ -7,12 +7,13 @@ import { Fragment } from "react";
 import { StatTitle } from "./Stats.styles";
 
 export const Stats = ({ pokemon, version, changeStat }) => {
+    console.log(version);
     return (
         <Fragment>
             <div></div>
             <StatTitle>Base</StatTitle>
-            <StatTitle>{version < 2 ? "DVs" : "IVs"}</StatTitle>
-            <StatTitle>{version < 2 ? "statEXP" : "EVs"}</StatTitle>
+            <StatTitle>{version <= 2 ? "DVs" : "IVs"}</StatTitle>
+            <StatTitle>{version <= 2 ? "statEXP" : "EVs"}</StatTitle>
             <StatTitle>Final</StatTitle>
             <StatTitle>Stage</StatTitle>
             {stats.map((stat, index) => {

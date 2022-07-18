@@ -92,7 +92,7 @@ export const Trainer = ({ version }) => {
     const calculateStat = (stat, statObj, level) => {
         const bonus = stat === "hp" ? level + 10 : 5;
         const baseAndIv =
-            version < 2
+            version <= 2
                 ? 2 * (statObj.base + statObj.iv)
                 : 2 * statObj.base + statObj.iv;
         return (

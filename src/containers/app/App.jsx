@@ -10,7 +10,7 @@ export const App = () => {
         <EmotionProvider>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/home/:version" element={<Landing />} />
+                    <Route path="/home/:generation" element={<Landing />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/" element={<Navigate to="/home/4" />} />
                     <Route path="*" element={<PageNotFound />} />
